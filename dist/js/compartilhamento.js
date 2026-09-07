@@ -10,7 +10,7 @@
   var shareButtons = Array.prototype.slice.call(document.querySelectorAll("[data-share]"));
   var shareControls = [copyButton].concat(shareButtons);
   var shareBusy = false;
-  var origin = window.location.protocol === "file:" ? "https://cyberbus-viagem.nifty-fern-8892.chatgpt.site" : window.location.origin;
+  var origin = window.location.protocol === "file:" ? "https://cyberbus-viagem.diogofrota.chatgpt.site" : window.location.origin;
   var shareUrl = origin + "/acompanhamento.html?trip=" + encodeURIComponent(data.code) + "&share=demo7K2";
   var navigationUrl = app.withTrip("acompanhamento.html?share=demo7K2");
 
