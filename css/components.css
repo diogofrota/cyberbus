@@ -35,6 +35,10 @@
   gap: 20px;
 }
 
+.home-header--centered {
+  justify-content: center;
+}
+
 .brand {
   display: inline-flex;
   min-height: 44px;
@@ -96,6 +100,21 @@
   align-items: center;
   gap: 72px;
   padding-block: 40px 56px;
+}
+
+.home-main.home-main--single {
+  grid-template-columns: minmax(0, 680px);
+  justify-content: center;
+}
+
+.home-main--single .home-intro {
+  max-width: 680px;
+  text-align: center;
+}
+
+.home-main--single .home-intro__text,
+.home-main--single .locator-card {
+  margin-inline: auto;
 }
 
 .home-intro {
