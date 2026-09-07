@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Detalhes e serviços de um ponto de parada da viagem CyberBus.">
+    <title>Detalhes da parada — CyberBus</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+  </head>
+  <body class="app-page" data-page="parada-detalhes" aria-busy="true">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <div data-app-header></div>
+
+    <main class="app-main container" id="conteudo">
+      <nav class="breadcrumb" aria-label="Navegação estrutural"><a href="viagem.html?trip=BR1024">Minha viagem</a><span>/</span><a href="paradas.html?trip=BR1024">Paradas</a><span>/</span><span aria-current="page">Detalhes</span></nav>
+      <div id="stop-detail"></div>
+    </main>
+
+    <div data-app-footer></div>
+    <div data-bottom-nav></div>
+    <div data-more-sheet></div>
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/parada-detalhes.js"></script>
+  </body>
+</html>

@@ -1,0 +1,606 @@
+@media (min-width: 920px) {
+  .home-main {
+    grid-template-columns: minmax(0, 1.05fr) minmax(390px, 0.95fr);
+  }
+}
+
+@media (max-width: 919px) {
+  .home-main {
+    max-width: 680px;
+    gap: 50px;
+    padding-top: 34px;
+  }
+
+  .home-intro,
+  .locator-card,
+  .journey-preview {
+    max-width: none;
+  }
+
+  .journey-preview {
+    justify-self: stretch;
+  }
+
+  .journey-preview__halo {
+    inset: -80px 0;
+  }
+
+  .app-page .toast-region {
+    bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 16px);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .home-header {
+    min-height: 70px;
+  }
+
+  .secure-label {
+    max-width: 118px;
+    justify-content: flex-end;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .home-main {
+    display: block;
+    padding-block: 34px 42px;
+  }
+
+  .home-intro > h1 {
+    margin-bottom: 18px;
+    font-size: clamp(2.55rem, 13vw, 4rem);
+  }
+
+  .home-intro__text {
+    margin-bottom: 24px;
+    font-size: 1rem;
+  }
+
+  .locator-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .journey-preview {
+    margin-top: 52px;
+  }
+
+  .route-card {
+    border-radius: 26px;
+    transform: none;
+  }
+
+  .route-card__top {
+    padding-inline: 20px;
+  }
+
+  .route-line {
+    margin-inline: 40px;
+  }
+
+  .route-card__cities {
+    gap: 8px;
+    padding-inline: 20px;
+  }
+
+  .route-card__cities span {
+    font-size: 1.85rem;
+  }
+
+  .route-card__cities strong {
+    font-size: 0.75rem;
+  }
+
+  .route-card__cities small {
+    max-width: 90px;
+    font-size: 0.75rem;
+  }
+
+  .route-card__cities > div:last-child small {
+    margin-left: auto;
+  }
+
+  .route-card__footer {
+    padding-inline: 20px;
+  }
+
+  .benefit-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .home-footer {
+    min-height: 88px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand {
+    font-size: 1.12rem;
+  }
+
+  .brand__mark {
+    width: 35px;
+    height: 35px;
+  }
+
+  .locator-card__heading p {
+    max-width: 190px;
+  }
+
+  .route-card__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 12px;
+  }
+}
+
+@media (min-width: 600px) {
+  .app-main {
+    padding-block: 30px 58px;
+  }
+
+  .section-heading {
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .feature-grid,
+  .details-grid,
+  .establishment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trip-hero {
+    padding: 28px;
+  }
+
+  .trip-hero__company {
+    display: flex;
+  }
+
+  .trip-hero__bottom {
+    grid-template-columns: 0.7fr 1fr 1fr auto;
+    align-items: center;
+  }
+
+  .trip-hero__bottom .button {
+    grid-column: auto;
+    margin: 0;
+  }
+
+  .bus-hero__image,
+  .bus-hero__image img {
+    min-height: 0;
+  }
+
+  .bus-hero__panel {
+    padding: 28px;
+  }
+
+  .recognition-card ol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .amenity-row {
+    justify-content: flex-start;
+  }
+
+  .map-toggle {
+    width: 280px;
+  }
+
+  .terminal-map-wrap,
+  .terminal-map {
+    min-height: 500px;
+    height: 500px;
+  }
+
+  .stop-detail-hero__visual {
+    min-height: 360px;
+  }
+
+  .stop-detail-hero__stats {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 16px;
+  }
+
+  .stop-detail-hero__stats > div,
+  .stop-detail-hero__stats > div:nth-child(odd),
+  .stop-detail-hero__stats > div:nth-last-child(-n + 2) {
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  .stop-detail-hero__stats > div:last-child {
+    border-right: 0;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stop-catalog-cta {
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .stop-catalog-cta > .button {
+    flex: 0 0 auto;
+  }
+
+  .filter-section .section-heading {
+    align-items: center;
+  }
+
+  .establishment-hero__image,
+  .establishment-hero__image img {
+    min-height: 420px;
+  }
+
+  .menu-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .share-panel {
+    padding: 28px;
+  }
+
+  .public-intro {
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .public-status-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .emergency-data {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .emergency-data > div:nth-child(odd) {
+    padding-right: 16px;
+    border-right: 1px solid var(--line);
+  }
+
+  .emergency-data > div:nth-child(even) {
+    padding-left: 16px;
+  }
+
+  .confirm-dialog__actions {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-heading {
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .page-heading--dashboard {
+    align-items: center;
+  }
+
+  .page-heading > .badge,
+  .page-heading > .button,
+  .page-heading > .status-cluster,
+  .page-heading > .updated-chip {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 920px) {
+  .app-header__inner {
+    min-height: 74px;
+  }
+
+  .desktop-nav {
+    display: flex;
+  }
+
+  .bottom-nav {
+    display: none;
+  }
+
+  .app-footer {
+    padding-bottom: 0;
+  }
+
+  .app-main {
+    min-height: calc(100vh - 148px);
+    padding-block: 34px 68px;
+  }
+
+  .dashboard-layout {
+    grid-template-columns: minmax(0, 1.8fr) minmax(280px, 0.82fr);
+    align-items: start;
+    gap: 24px;
+  }
+
+  .bus-hero {
+    grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.75fr);
+  }
+
+  .bus-hero__image,
+  .bus-hero__image img {
+    min-height: 0;
+  }
+
+  .bus-hero__panel {
+    justify-content: center;
+    padding: 34px;
+  }
+
+  .details-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .recognition-card {
+    padding: 28px;
+  }
+
+  .terminal-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+    gap: 22px;
+  }
+
+  .route-layout {
+    grid-template-columns: minmax(0, 1fr) 330px;
+    align-items: start;
+    gap: 22px;
+  }
+
+  .travel-map {
+    height: 590px;
+    max-height: none;
+  }
+
+  .route-sidebar {
+    position: sticky;
+    top: 96px;
+  }
+
+  .stops-layout {
+    grid-template-columns: minmax(0, 1.45fr) minmax(270px, 0.65fr);
+    align-items: start;
+    gap: 28px;
+  }
+
+  .stops-summary {
+    position: sticky;
+    top: 96px;
+  }
+
+  .stop-detail-hero {
+    grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+  }
+
+  .stop-detail-hero__visual {
+    min-height: 440px;
+  }
+
+  .stop-detail-hero__stats {
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    padding: 18px;
+  }
+
+  .stop-detail-hero__stats > div,
+  .stop-detail-hero__stats > div:nth-child(odd),
+  .stop-detail-hero__stats > div:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stop-detail-hero__stats > div:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .stop-detail-hero__stats > div:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .establishment-hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(380px, 0.85fr);
+  }
+
+  .establishment-hero__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 36px;
+  }
+
+  .menu-layout {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .share-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.75fr);
+    align-items: start;
+    gap: 34px;
+  }
+
+  .share-preview {
+    position: sticky;
+    top: 96px;
+  }
+
+  .public-main {
+    padding-block: 48px;
+  }
+
+  .public-content-grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
+    align-items: stretch;
+  }
+
+  .travel-map--public {
+    height: 560px;
+    min-height: 560px;
+  }
+
+  .public-timeline {
+    padding: 25px;
+  }
+
+  .emergency-layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+    align-items: start;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .desktop-nav__link {
+    padding-inline: 16px;
+  }
+
+  .establishment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .app-header__inner .brand {
+    font-size: 1.08rem;
+  }
+
+  .app-header__inner .brand__mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .app-header__inner .brand__mark svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .app-footer {
+    min-height: 132px;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 24px;
+  }
+
+  .app-footer a {
+    margin-right: auto;
+  }
+
+  .trip-hero__route > div:not(.trip-hero__path) > span {
+    font-size: 2rem;
+  }
+
+  .trip-hero__route small {
+    max-width: 92px;
+  }
+
+  .travel-map__labels .map-stop {
+    display: none;
+  }
+
+  .travel-map__labels .map-stop--origin,
+  .travel-map__labels .map-stop--destination,
+  .travel-map__labels .map-stop.is-next {
+    display: block;
+  }
+
+  .travel-map--public .map-stop--origin small {
+    transform: translateX(-30%);
+  }
+
+  .travel-map--public .map-stop--destination small {
+    transform: translateX(-70%);
+  }
+
+  .stop-card__footer > span:first-child:empty {
+    display: none;
+  }
+
+  .public-header__label {
+    max-width: 92px;
+    text-align: right;
+    line-height: 1.25;
+  }
+
+  .public-footer {
+    min-height: 92px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 360px) {
+  .trip-code-pill {
+    padding-inline: 8px;
+    font-size: 0.75rem;
+  }
+
+  .app-main {
+    padding-top: 20px;
+  }
+
+  .page-heading h1 {
+    font-size: 1.85rem;
+  }
+
+  .trip-hero {
+    padding: 18px;
+  }
+
+  .trip-hero__route {
+    gap: 5px;
+  }
+
+  .trip-hero__path {
+    width: 48px;
+  }
+
+  .next-stop-card__metrics {
+    gap: 5px;
+  }
+
+  .share-options {
+    grid-template-columns: 1fr;
+  }
+
+  .share-option {
+    min-height: 76px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-inline: 12px;
+  }
+
+  .share-option > span {
+    margin: 0 5px 0 0;
+  }
+
+  .share-option small {
+    display: none;
+  }
+}
