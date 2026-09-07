@@ -27,36 +27,98 @@
 
       <div class="terminal-layout">
         <section class="terminal-map-card" aria-labelledby="terminal-map-title">
-          <div class="map-card__top"><div><span class="live-map-dot"></span><strong id="terminal-map-title">Mapa interno</strong></div><span>Deslize no celular</span></div>
+          <div class="map-card__top"><div><span class="live-map-dot"></span><strong id="terminal-map-title">Mapa interno</strong></div><span>Térreo · Setor B</span></div>
           <div class="terminal-map-wrap" id="terminal-map">
-            <svg class="terminal-map" viewBox="0 0 800 520" role="img" aria-labelledby="terminal-map-svg-title terminal-map-svg-desc">
-              <title id="terminal-map-svg-title">Mapa da Rodoviária Novo Rio até a plataforma 12</title>
-              <desc id="terminal-map-svg-desc">A rota sai da entrada principal, cruza o corredor central, passa pelo setor B e chega à plataforma 12. O mapa também indica banheiros, restaurantes, lanchonetes, lojas, bilheterias, escadas, elevador e informação.</desc>
+            <svg class="terminal-map" viewBox="0 0 320 520" role="img" aria-labelledby="terminal-map-svg-title terminal-map-svg-desc">
+              <title id="terminal-map-svg-title">Planta baixa térrea da Rodoviária Novo Rio até a plataforma 12</title>
+              <desc id="terminal-map-svg-desc">Planta do piso térreo com a entrada principal na parte inferior, saída à direita, bilheterias, informação, banheiros acessíveis, praça de alimentação, lojas, corredor principal e os portões das plataformas 9 a 14. Uma rota azul tracejada parte da posição atual, passa pelo corredor e pelo setor B e termina na plataforma 12, destacada em azul.</desc>
+              <defs>
+                <linearGradient id="platform-12-highlight" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1769e0"></stop>
+                  <stop offset="1" stop-color="#064fae"></stop>
+                </linearGradient>
+                <pattern id="boarding-lane-pattern" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <rect width="4" height="8" fill="#dce8ef"></rect>
+                </pattern>
+              </defs>
+
               <g class="terminal-map__floor">
-                <path d="M64 86h672v348H64z"></path>
-                <path d="M88 111h166v112H88zM88 246h166v162H88zM282 111h211v116H282zM282 253h211v155H282zM522 111h190v96H522zM522 232h190v176H522z"></path>
+                <path d="M30 42H290Q302 42 302 54V492H192V504H128V492H18V54Q18 42 30 42Z"></path>
+                <path d="M28 60H108V104H28ZM28 112H108V156H28ZM28 164H108V208H28ZM212 60H292V104H212ZM212 112H292V156H212ZM212 164H292V208H212ZM28 250H116V322H28ZM204 250H292V322H204ZM28 342H124V404H28ZM196 342H244V374H196ZM250 342H292V374H250ZM196 382H292V416H196ZM28 424H116V476H28ZM204 424H292V476H204Z"></path>
               </g>
+
+              <g aria-hidden="true" fill="none" stroke="#c4d4df" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M116 60V208M204 60V208M116 250V322M204 250V322M124 342V404M196 342V416M116 424V476M204 424V476"></path>
+                <path d="M116 224H204M116 332H204M124 416H196" stroke-dasharray="3 5"></path>
+                <path d="M128 492V477M192 492V477" stroke="#89a2b3" stroke-width="3"></path>
+              </g>
+
+              <g aria-hidden="true" fill="url(#boarding-lane-pattern)" opacity="0.8">
+                <rect x="19" y="60" width="9" height="44"></rect>
+                <rect x="19" y="112" width="9" height="44"></rect>
+                <rect x="19" y="164" width="9" height="44"></rect>
+                <rect x="292" y="60" width="9" height="44"></rect>
+                <rect x="292" y="112" width="9" height="44"></rect>
+                <rect x="292" y="164" width="9" height="44"></rect>
+              </g>
+
+              <g aria-hidden="true" fill="#e8f0f5" stroke="#b7cad7">
+                <rect x="106" y="74" width="12" height="16" rx="2"></rect>
+                <rect x="106" y="126" width="12" height="16" rx="2"></rect>
+                <rect x="106" y="178" width="12" height="16" rx="2"></rect>
+                <rect x="202" y="74" width="12" height="16" rx="2"></rect>
+                <rect x="202" y="126" width="12" height="16" rx="2"></rect>
+                <rect x="202" y="178" width="12" height="16" rx="2"></rect>
+              </g>
+              <rect x="212" y="60" width="80" height="44" rx="5" fill="url(#platform-12-highlight)" stroke="#06448f" stroke-width="2"></rect>
+              <rect x="202" y="73" width="13" height="18" rx="3" fill="#0bbbd0" stroke="#ffffff" stroke-width="2"></rect>
+
               <g class="terminal-map__labels">
-                <text x="118" y="149">Entrada</text><text x="118" y="171">principal</text>
-                <text x="113" y="306">Bilheterias</text><text class="minor" x="113" y="334">Lojas · caixas</text>
-                <text x="349" y="161">Corredor central</text>
-                <text x="350" y="316">Restaurantes</text><text class="minor" x="350" y="344">Lanchonetes · café</text>
-                <text x="576" y="147">Setor A</text><text class="minor" x="558" y="175">Escadas · elevador</text>
-                <text x="575" y="302">Setor B</text>
-                <text x="573" y="334">Plataformas 9–14</text>
+                <text class="minor" x="68" y="77" text-anchor="middle">PORTÃO 09</text><text x="68" y="97" text-anchor="middle">Plat. 9</text>
+                <text class="minor" x="68" y="129" text-anchor="middle">PORTÃO 10</text><text x="68" y="149" text-anchor="middle">Plat. 10</text>
+                <text class="minor" x="68" y="181" text-anchor="middle">PORTÃO 11</text><text x="68" y="201" text-anchor="middle">Plat. 11</text>
+                <text class="minor" x="252" y="77" text-anchor="middle" fill="#ffffff">PORTÃO 12</text><text x="252" y="97" text-anchor="middle" fill="#ffffff">Plat. 12</text>
+                <text class="minor" x="252" y="129" text-anchor="middle">PORTÃO 13</text><text x="252" y="149" text-anchor="middle">Plat. 13</text>
+                <text class="minor" x="252" y="181" text-anchor="middle">PORTÃO 14</text><text x="252" y="201" text-anchor="middle">Plat. 14</text>
+
+                <text class="minor" x="68" y="216" text-anchor="middle">SETOR A</text>
+                <text x="160" y="233" text-anchor="middle">Corredor</text><text class="minor" x="160" y="248" text-anchor="middle">PRINCIPAL</text>
+                <text class="minor" x="252" y="216" text-anchor="middle">SETOR B</text>
+
+                <text x="72" y="278" text-anchor="middle">Praça de</text><text class="minor" x="72" y="298" text-anchor="middle">alimentação</text>
+                <text x="248" y="278" text-anchor="middle">Lojas</text><text class="minor" x="248" y="298" text-anchor="middle">conveniência</text>
+                <text x="76" y="368" text-anchor="middle">Bilheterias</text><text class="minor" x="76" y="389" text-anchor="middle">guichês 1–8</text>
+                <text class="minor" x="220" y="371" text-anchor="middle">INFO</text>
+                <text class="minor" x="271" y="371" text-anchor="middle">WC</text>
+                <text class="minor" x="254" y="399" text-anchor="middle">Acessível</text><text class="minor" x="254" y="413" text-anchor="middle">elevador</text>
+                <text x="72" y="450" text-anchor="middle">Espera</text><text class="minor" x="72" y="470" text-anchor="middle">assentos</text>
+                <text class="minor" x="248" y="450" text-anchor="middle">Desembarque</text><text class="minor" x="248" y="470" text-anchor="middle">táxi · apps</text>
+                <text x="160" y="513" text-anchor="middle">Entrada principal</text>
+                <text class="minor" x="266" y="489" text-anchor="middle">Saída</text>
               </g>
+
+              <g aria-hidden="true" fill="none" stroke="#567487" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M151 499l9-9 9 9M160 490v15"></path>
+                <path d="M273 481h17M285 476l5 5-5 5"></path>
+              </g>
+
               <g class="terminal-map__pois">
-                <g transform="translate(307 285)"><circle r="17"></circle><text x="-5" y="6">i</text></g>
-                <g transform="translate(455 289)"><circle r="17"></circle><text x="-8" y="6">WC</text></g>
-                <g transform="translate(561 191)"><circle r="17"></circle><text x="-6" y="6">↕</text></g>
-                <g transform="translate(671 191)"><circle r="17"></circle><text x="-7" y="6">☕</text></g>
+                <g transform="translate(72 309)"><title>Praça de alimentação</title><circle r="12" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">CAFÉ</text></g>
+                <g transform="translate(248 309)"><title>Lojas de conveniência</title><circle r="12" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">LJ</text></g>
+                <g transform="translate(220 352)"><title>Balcão de informação</title><circle r="11" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">i</text></g>
+                <g transform="translate(271 352)"><title>Banheiros</title><circle r="11" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">WC</text></g>
+                <g transform="translate(211 399)"><title>Acessibilidade e elevador</title><circle r="11" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">♿</text></g>
               </g>
-              <path class="terminal-map__route-shadow" d="M145 184 C150 238 200 252 300 252 S455 235 515 278 S576 357 647 352"></path>
-              <path class="terminal-map__route" d="M145 184 C150 238 200 252 300 252 S455 235 515 278 S576 357 647 352"></path>
-              <g class="terminal-map__you" transform="translate(145 184)"><circle r="24"></circle><circle r="8"></circle></g>
-              <g class="terminal-map__destination" transform="translate(647 352)"><circle r="28"></circle><path d="M-7-8h14v14H-7zM-4 9v5M4 9v5"></path></g>
-              <g class="terminal-map__callout terminal-map__callout--you"><rect x="83" y="112" width="124" height="40" rx="12"></rect><text x="102" y="138">Você está aqui</text></g>
-              <g class="terminal-map__callout terminal-map__callout--platform"><rect x="594" y="393" width="110" height="40" rx="12"></rect><text x="611" y="419">Plataforma 12</text></g>
+
+              <path class="terminal-map__route-shadow" d="M160 480V424C160 407 171 397 188 397H194C203 397 208 390 208 381V244C208 232 216 224 228 224H235C246 224 252 216 252 205V105C252 92 242 82 228 82H216"></path>
+              <path class="terminal-map__route" d="M160 480V424C160 407 171 397 188 397H194C203 397 208 390 208 381V244C208 232 216 224 228 224H235C246 224 252 216 252 205V105C252 92 242 82 228 82H216"></path>
+              <g class="terminal-map__you" transform="translate(160 480)"><circle r="20"></circle><circle r="7"></circle></g>
+              <g class="terminal-map__destination" transform="translate(216 82)"><circle r="20"></circle><path d="M-6-7h12v12H-6zM-3 8v4M3 8v4"></path></g>
+              <g class="terminal-map__callout terminal-map__callout--you"><rect x="93" y="431" width="134" height="36" rx="11"></rect><text x="160" y="454" text-anchor="middle">Você está aqui</text></g>
+              <g class="terminal-map__callout terminal-map__callout--platform">
+                <path d="M226 42L217 61" fill="none" stroke="#9eb3c1" stroke-width="1.5"></path>
+                <rect x="178" y="5" width="126" height="36" rx="11"></rect><text x="241" y="28" text-anchor="middle">Plataforma 12</text>
+              </g>
             </svg>
             <div class="map-legend"><span><i class="legend-route"></i>Sua rota</span><span><i class="legend-poi"></i>Pontos úteis</span></div>
           </div>

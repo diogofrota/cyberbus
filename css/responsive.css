@@ -200,10 +200,13 @@
     width: 280px;
   }
 
-  .terminal-map-wrap,
+  .terminal-map-wrap {
+    min-height: 0;
+  }
+
   .terminal-map {
-    min-height: 500px;
-    height: 500px;
+    min-height: 0;
+    height: auto;
   }
 
   .stop-detail-hero__visual {
@@ -527,6 +530,14 @@
     display: block;
   }
 
+  .leaflet-tooltip.cyberbus-real-map__stop-tooltip--stop {
+    display: none;
+  }
+
+  .leaflet-tooltip.cyberbus-real-map__stop-tooltip--stop.is-next {
+    display: block;
+  }
+
   .travel-map--public .map-stop--origin small {
     transform: translateX(-30%);
   }
@@ -555,6 +566,21 @@
 }
 
 @media (max-width: 360px) {
+  .terminal-map-wrap {
+    padding: 8px;
+  }
+
+  .map-legend {
+    gap: 7px;
+    padding: 7px 8px;
+    font-size: 0.68rem;
+  }
+
+  .real-map-chip {
+    right: 8px;
+    font-size: 0.64rem;
+  }
+
   .trip-code-pill {
     padding-inline: 8px;
     font-size: 0.75rem;

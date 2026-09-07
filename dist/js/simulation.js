@@ -6,6 +6,32 @@
   var storageKey = "cyberbus-simulation-" + data.code;
   var sessionTtl = 12 * 60 * 1000;
   var memorySession = null;
+  var geographicPath = Array.isArray(data.route.mapPath) && data.route.mapPath.length > 1
+    ? data.route.mapPath
+    : data.stops.map(function (stop) { return stop.coordinates; });
+  var geographicDistances = [0];
+  var geographicTotalDistance = 0;
+
+  function radians(value) {
+    return value * Math.PI / 180;
+  }
+
+  function distanceBetween(start, end) {
+    var earthRadius = 6371;
+    var latitudeDelta = radians(end[0] - start[0]);
+    var longitudeDelta = radians(end[1] - start[1]);
+    var latitudeStart = radians(start[0]);
+    var latitudeEnd = radians(end[0]);
+    var haversine = Math.sin(latitudeDelta / 2) * Math.sin(latitudeDelta / 2) +
+      Math.cos(latitudeStart) * Math.cos(latitudeEnd) *
+      Math.sin(longitudeDelta / 2) * Math.sin(longitudeDelta / 2);
+    return earthRadius * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+  }
+
+  geographicPath.slice(1).forEach(function (point, index) {
+    geographicTotalDistance += distanceBetween(geographicPath[index], point);
+    geographicDistances.push(geographicTotalDistance);
+  });
 
   function readSession() {
     try {
@@ -51,6 +77,31 @@
     };
   }
 
+  function interpolateGeographicPosition(progress) {
+    var boundedProgress = Math.max(0, Math.min(100, progress));
+    var targetDistance = geographicTotalDistance * (boundedProgress / 100);
+    var segmentIndex = 0;
+
+    while (segmentIndex < geographicDistances.length - 2 && geographicDistances[segmentIndex + 1] < targetDistance) {
+      segmentIndex += 1;
+    }
+
+    var segmentStart = geographicDistances[segmentIndex];
+    var segmentEnd = geographicDistances[segmentIndex + 1];
+    var segmentLength = Math.max(0.000001, segmentEnd - segmentStart);
+    var fraction = Math.max(0, Math.min(1, (targetDistance - segmentStart) / segmentLength));
+    var start = geographicPath[segmentIndex];
+    var end = geographicPath[segmentIndex + 1];
+
+    return {
+      position: [
+        start[0] + ((end[0] - start[0]) * fraction),
+        start[1] + ((end[1] - start[1]) * fraction)
+      ],
+      segmentIndex: segmentIndex
+    };
+  }
+
   function formatSimulatedClock(progress) {
     var departureMinutes = minutesFromTime(data.route.departure);
     var arrivalMinutes = minutesFromTime(data.route.estimatedArrival);
@@ -74,6 +125,7 @@
     var etaOffsets = [0, 1, 0, -1];
     var etaOffset = progress >= 100 ? 0 : etaOffsets[elapsedSteps % etaOffsets.length];
     var nextStopBaseEta = nextStop.estimated || nextStop.scheduled;
+    var geographicPosition = interpolateGeographicPosition(progress);
     return {
       progress: Math.round(progress * 10) / 10,
       progressLabel: Math.round(progress) + "%",
@@ -86,6 +138,8 @@
       previousStop: previousStop,
       finalEta: timeWithOffset(data.route.estimatedArrival, etaOffset),
       position: interpolatePosition(progress),
+      geoPosition: geographicPosition.position,
+      geoSegmentIndex: geographicPosition.segmentIndex,
       simulatedClock: formatSimulatedClock(progress),
       isComplete: progress >= 100,
       updatedAt: now
