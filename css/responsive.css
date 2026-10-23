@@ -26,7 +26,15 @@
   }
 
   .app-page .toast-region {
-    bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 16px);
+    bottom: calc(env(safe-area-inset-bottom) + 16px);
+  }
+
+  .app-header__home-link:not(.app-header__menu-button) {
+    display: none;
+  }
+
+  .app-header__menu-button {
+    display: inline-flex;
   }
 }
 

@@ -14,6 +14,7 @@
     share: '<path d="M8.5 13.5 15.5 10M8.5 10.5 15.5 7M18 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 4a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>',
     store: '<path d="M4 10v10h16V10M3 10l2-6h14l2 6M8 20v-6h8v6M3 10a3 3 0 0 0 5 2 3 3 0 0 0 4 0 3 3 0 0 0 4 0 3 3 0 0 0 5-2"></path>',
     more: '<path d="M5 12h.01M12 12h.01M19 12h.01"></path>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"></path>',
     chevron: '<path d="m9 18 6-6-6-6"></path>',
     back: '<path d="m15 18-6-6 6-6"></path>',
     close: '<path d="m6 6 12 12M18 6 6 18"></path>',
@@ -183,6 +184,7 @@
         return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + visibility + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
       }).join("") + "</nav>" +
       '<a class="app-header__home-link" href="' + withTrip("viagem.html") + '" aria-label="Abrir minha viagem">' + icon("home") + "Início</a>" +
+      '<button class="app-header__home-link app-header__menu-button" type="button" data-open-more aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">' + icon("menu") + "Menu</button>" +
       "</div></header>";
   }
 
@@ -208,19 +210,27 @@
   function injectMoreSheet() {
     var mount = document.querySelector("[data-more-sheet]");
     if (!mount) return;
+    var page = document.body.dataset.page || "viagem";
     mount.innerHTML = '<div class="sheet-backdrop" data-close-more hidden></div>' +
-      '<section class="more-sheet" role="dialog" aria-modal="true" aria-labelledby="more-title" aria-hidden="true" hidden inert>' +
+      '<section class="more-sheet" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="more-title" aria-hidden="true" hidden inert>' +
       '<div class="more-sheet__handle" aria-hidden="true"></div>' +
-      '<div class="more-sheet__header"><div><p class="eyebrow">Outros recursos</p><h2 id="more-title">O que você precisa?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
-      '<div class="more-sheet__grid">' +
+      '<div class="more-sheet__header"><div><p class="eyebrow">Menu</p><h2 id="more-title">Para onde você quer ir?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
+      '<nav class="more-sheet__grid" aria-label="Páginas da viagem">' +
+      '<p class="eyebrow more-sheet__section-label">Navegação</p>' +
+      '<a href="index.html"><span class="feature-icon">' + icon("home") + "</span><span><strong>Início</strong><small>Consultar outra viagem</small></span>" + icon("chevron") + "</a>" +
+      '<a href="' + withTrip("viagem.html") + '"' + (page === "viagem" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("ticket") + "</span><span><strong>Minha viagem</strong><small>Resumo e detalhes da viagem</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only data-preparing-only hidden href="' + withTrip("onibus.html") + '"' + (page === "onibus" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("bus") + "</span><span><strong>Ônibus e embarque</strong><small>Veja os dados do seu ônibus</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only data-preparing-only hidden href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only href="' + withTrip("rota.html") + '"' + (page === "rota" ? ' aria-current="page"' : "") + '><span class="feature-icon feature-icon--cyan">' + icon("route") + "</span><span><strong>Rota</strong><small>Acompanhe o trajeto</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only href="' + withTrip("paradas.html") + '"' + (activeFor(page, "paradas") ? ' aria-current="page"' : "") + '><span class="feature-icon feature-icon--green">' + icon("stops") + "</span><span><strong>Paradas</strong><small>Veja os pontos de apoio</small></span>" + icon("chevron") + "</a>" +
+      '<a data-complete-only hidden href="' + withTrip("avaliacao.html") + '"><span class="feature-icon feature-icon--green">' + icon("star") + "</span><span><strong>Avaliar viagem</strong><small>Conte como foi sua experiência</small></span>" + icon("chevron") + "</a>" +
+      '<p class="eyebrow more-sheet__section-label">Outros recursos</p>' +
       '<a data-trip-only href="' + withTrip("estabelecimentos.html?stop=resende") + '"><span class="feature-icon feature-icon--amber">' + icon("store") + "</span><span><strong>Restaurantes e lojas</strong><small>Veja o que há nas paradas</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("clima.html") + '"><span class="feature-icon feature-icon--cyan">' + icon("weather") + "</span><span><strong>Clima na chegada</strong><small>Veja a previsão simulada no destino</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("roteiros.html") + '"><span class="feature-icon feature-icon--violet">' + icon("landmark") + "</span><span><strong>Roteiros turísticos</strong><small>Explore São Paulo após a viagem</small></span>" + icon("chevron") + "</a>" +
-      '<a data-complete-only hidden href="' + withTrip("avaliacao.html") + '"><span class="feature-icon feature-icon--green">' + icon("star") + "</span><span><strong>Avaliar viagem</strong><small>Conte como foi sua experiência</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only href="' + withTrip("compartilhar.html") + '"><span class="feature-icon feature-icon--green">' + icon("share") + "</span><span><strong>Compartilhar viagem</strong><small>Mantenha a família informada</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only class="more-sheet__danger" href="' + withTrip("emergencia.html") + '"><span class="feature-icon feature-icon--red">' + icon("alert") + "</span><span><strong>Emergência</strong><small>Dados e suporte da viagem</small></span>" + icon("chevron") + "</a>" +
-      "</div></section>";
+      "</nav></section>";
 
     var sheet = mount.querySelector(".more-sheet");
     var backdrop = mount.querySelector(".sheet-backdrop");
@@ -290,7 +300,7 @@
       bottomNav.classList.toggle("is-underway", !complete && !preparing);
     }
     var title = document.getElementById("more-title");
-    if (title) title.textContent = complete ? "Depois da chegada" : "O que você precisa?";
+    if (title) title.textContent = complete ? "Depois da chegada" : "Para onde você quer ir?";
     if (document.activeElement && document.activeElement.hidden) {
       var sheet = document.querySelector(".more-sheet");
       var focusTarget = sheet && !sheet.hidden ? sheet.querySelector("[data-close-more]") : document.querySelector(".app-header__home-link");
@@ -324,7 +334,8 @@
     loader.textContent = "Carregando informações da viagem.";
     document.body.appendChild(loader);
     injectHeader();
-    injectBottomNav();
+    // A navegação inferior foi movida para o menu do cabeçalho no celular.
+    // injectBottomNav();
     injectMoreSheet();
     injectFooter();
     if (document.body.classList.contains("app-page") && window.CyberBusSimulation) {
