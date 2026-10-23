@@ -29,9 +29,19 @@
         <section class="terminal-map-card" aria-labelledby="terminal-map-title">
           <div class="map-card__top"><div><span class="live-map-dot"></span><strong id="terminal-map-title">Mapa interno</strong></div><span>Térreo · Setor B</span></div>
           <div class="terminal-map-wrap" id="terminal-map">
-            <svg class="terminal-map" viewBox="0 0 320 520" role="img" aria-labelledby="terminal-map-svg-title terminal-map-svg-desc">
+            <!-- Resumo lateral do caminho desativado; a rota continua indicada no mapa e na lista de passos.
+            <div class="terminal-map-guide" aria-label="Resumo do caminho">
+              <span class="terminal-map-guide__eyebrow">Seu caminho no terminal</span>
+              <h2>Da entrada ao portão 12</h2>
+              <p>Siga pelo corredor central. No Setor B, vire à direita para chegar à sua plataforma.</p>
+              <div class="terminal-map-guide__progress" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="terminal-map-guide__stops"><span>Você está aqui</span><span>Corredor central</span><strong>Portão 12</strong></div>
+              <div class="terminal-map-guide__time"><span>↗</span> Cerca de 4 min a pé</div>
+            </div>
+            -->
+            <svg class="terminal-map" viewBox="0 35 320 485" role="img" aria-labelledby="terminal-map-svg-title terminal-map-svg-desc">
               <title id="terminal-map-svg-title">Planta baixa térrea da Rodoviária Novo Rio até a plataforma 12</title>
-              <desc id="terminal-map-svg-desc">Planta do piso térreo com a entrada principal na parte inferior, saída à direita, bilheterias, informação, banheiros acessíveis, praça de alimentação, lojas, corredor principal e os portões das plataformas 9 a 14. Uma rota azul tracejada parte da posição atual, passa pelo corredor e pelo setor B e termina na plataforma 12, destacada em azul.</desc>
+              <desc id="terminal-map-svg-desc">Planta do piso térreo com a entrada principal na parte inferior, saída à direita, bilheterias, informação, banheiros acessíveis, praça de alimentação, lojas, corredor principal e os portões das plataformas 9 a 14. Uma rota azul sai da entrada principal, segue pelo corredor central e vira à direita para a plataforma 12, destacada em azul.</desc>
               <defs>
                 <linearGradient id="platform-12-highlight" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0" stop-color="#1769e0"></stop>
@@ -53,7 +63,7 @@
                 <path d="M128 492V477M192 492V477" stroke="#89a2b3" stroke-width="3"></path>
               </g>
 
-              <g aria-hidden="true" fill="url(#boarding-lane-pattern)" opacity="0.8">
+              <g aria-hidden="true" fill="url(#boarding-lane-pattern)" opacity="0.3">
                 <rect x="19" y="60" width="9" height="44"></rect>
                 <rect x="19" y="112" width="9" height="44"></rect>
                 <rect x="19" y="164" width="9" height="44"></rect>
@@ -70,19 +80,19 @@
                 <rect x="202" y="126" width="12" height="16" rx="2"></rect>
                 <rect x="202" y="178" width="12" height="16" rx="2"></rect>
               </g>
-              <rect x="212" y="60" width="80" height="44" rx="5" fill="url(#platform-12-highlight)" stroke="#06448f" stroke-width="2"></rect>
+              <rect x="212" y="60" width="80" height="44" rx="7" fill="url(#platform-12-highlight)" stroke="#06448f" stroke-width="2"></rect>
               <rect x="202" y="73" width="13" height="18" rx="3" fill="#0bbbd0" stroke="#ffffff" stroke-width="2"></rect>
 
               <g class="terminal-map__labels">
                 <text class="minor" x="68" y="77" text-anchor="middle">PORTÃO 09</text><text x="68" y="97" text-anchor="middle">Plat. 9</text>
                 <text class="minor" x="68" y="129" text-anchor="middle">PORTÃO 10</text><text x="68" y="149" text-anchor="middle">Plat. 10</text>
                 <text class="minor" x="68" y="181" text-anchor="middle">PORTÃO 11</text><text x="68" y="201" text-anchor="middle">Plat. 11</text>
-                <text class="minor" x="252" y="77" text-anchor="middle" fill="#ffffff">PORTÃO 12</text><text x="252" y="97" text-anchor="middle" fill="#ffffff">Plat. 12</text>
+                <text class="minor" x="258" y="77" text-anchor="middle" fill="#ffffff">PORTÃO 12</text><text x="258" y="97" text-anchor="middle" fill="#ffffff">Plat. 12</text>
                 <text class="minor" x="252" y="129" text-anchor="middle">PORTÃO 13</text><text x="252" y="149" text-anchor="middle">Plat. 13</text>
                 <text class="minor" x="252" y="181" text-anchor="middle">PORTÃO 14</text><text x="252" y="201" text-anchor="middle">Plat. 14</text>
 
                 <text class="minor" x="68" y="216" text-anchor="middle">SETOR A</text>
-                <text x="160" y="233" text-anchor="middle">Corredor</text><text class="minor" x="160" y="248" text-anchor="middle">PRINCIPAL</text>
+                <text x="132" y="233" text-anchor="middle">Corredor</text><text class="minor" x="132" y="248" text-anchor="middle">CENTRAL</text>
                 <text class="minor" x="252" y="216" text-anchor="middle">SETOR B</text>
 
                 <text x="72" y="278" text-anchor="middle">Praça de</text><text class="minor" x="72" y="298" text-anchor="middle">alimentação</text>
@@ -110,10 +120,10 @@
                 <g transform="translate(211 399)"><title>Acessibilidade e elevador</title><circle r="11" stroke-width="1.5"></circle><text y="1" text-anchor="middle" dominant-baseline="middle">♿</text></g>
               </g>
 
-              <path class="terminal-map__route-shadow" d="M160 480V424C160 407 171 397 188 397H194C203 397 208 390 208 381V244C208 232 216 224 228 224H235C246 224 252 216 252 205V105C252 92 242 82 228 82H216"></path>
-              <path class="terminal-map__route" d="M160 480V424C160 407 171 397 188 397H194C203 397 208 390 208 381V244C208 232 216 224 228 224H235C246 224 252 216 252 205V105C252 92 242 82 228 82H216"></path>
+              <path class="terminal-map__route-shadow" d="M160 480V426C160 416 165 408 174 408V106C174 93 186 82 205 82"></path>
+              <path class="terminal-map__route" d="M160 480V426C160 416 165 408 174 408V106C174 93 186 82 205 82"></path>
               <g class="terminal-map__you" transform="translate(160 480)"><circle r="20"></circle><circle r="7"></circle></g>
-              <g class="terminal-map__destination" transform="translate(216 82)"><circle r="20"></circle><path d="M-6-7h12v12H-6zM-3 8v4M3 8v4"></path></g>
+              <g class="terminal-map__destination" transform="translate(205 82)"><circle r="14"></circle><path d="M-5-5h10v9H-5zM-2 6v3M2 6v3"></path></g>
               <g class="terminal-map__callout terminal-map__callout--you"><rect x="93" y="431" width="134" height="36" rx="11"></rect><text x="160" y="454" text-anchor="middle">Você está aqui</text></g>
               <g class="terminal-map__callout terminal-map__callout--platform">
                 <path d="M226 42L217 61" fill="none" stroke="#9eb3c1" stroke-width="1.5"></path>

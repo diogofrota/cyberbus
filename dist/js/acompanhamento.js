@@ -10,8 +10,9 @@
 
   function timelineState(stop, snapshot) {
     if (snapshot.isComplete) return "done";
+    if (stop.type === "origin") return snapshot.isPreparing ? "next" : "done";
     if (stop.progress < snapshot.progress) return "done";
-    if (stop.id === snapshot.nextStop.id) return "next";
+    if (!snapshot.isPreparing && stop.id === snapshot.nextStop.id) return "next";
     return "future";
   }
 
@@ -46,7 +47,7 @@
     var list = mount.querySelector('[data-public="timeline"]');
     var markup = data.stops.map(function (stop) {
       var state = timelineState(stop, snapshot);
-      var label = state === "done" ? (stop.type === "origin" ? "Saída concluída" : stop.type === "destination" ? "Destino alcançado" : "Parada concluída") : state === "next" ? "Próxima parada" : stop.type === "destination" ? "Destino" : "Prevista";
+      var label = stop.type === "origin" && snapshot.isPreparing ? "Saída prevista" : state === "done" ? (stop.type === "origin" ? "Saída concluída" : stop.type === "destination" ? "Destino alcançado" : "Parada concluída") : state === "next" ? "Próxima parada" : stop.type === "destination" ? "Destino" : "Prevista";
       var displayTime = stop.id === snapshot.nextStop.id ? snapshot.nextStopEta : (stop.estimated || stop.actual || stop.scheduled);
       return '<li class="public-timeline__item public-timeline__item--' + state + (state === "next" ? " is-next" : "") + '"><span>' + (state === "done" ? app.icon("check") : "") + '</span><div><strong>' + app.escapeHtml(stop.city) + '</strong><small>' + label + ' · ' + app.escapeHtml(displayTime) + "</small></div></li>";
     }).join("");
@@ -55,9 +56,9 @@
 
   function render(snapshot) {
     if (!mount.firstElementChild) buildInterface();
-    var tripStatus = snapshot.isComplete ? "Viagem concluída" : data.status.label;
-    var punctuality = snapshot.isComplete ? "Chegada confirmada" : data.status.punctuality;
-    var nextLabel = snapshot.isComplete ? "Destino alcançado" : "Próxima parada";
+    var tripStatus = snapshot.isComplete ? "Viagem concluída" : snapshot.isPreparing ? "Aguardando saída" : data.status.label;
+    var punctuality = snapshot.isComplete ? "Chegada confirmada" : snapshot.isPreparing ? "Embarque em andamento" : data.status.punctuality;
+    var nextLabel = snapshot.isComplete ? "Destino alcançado" : snapshot.isPreparing ? "Primeira parada" : "Próxima parada";
     lastSnapshotAt = snapshot.updatedAt || Date.now();
     setText("trip-status", tripStatus);
     setText("arrival-label", snapshot.isComplete ? "Chegada confirmada" : "Chegada prevista");
@@ -70,11 +71,13 @@
     setText("remaining", snapshot.distanceRemaining + " km restantes");
     renderTimeline(snapshot);
     if (mapController) mapController.update(snapshot);
-    var currentState = snapshot.isComplete ? "complete" : snapshot.nextStop.id;
+    var currentState = snapshot.isComplete ? "complete" : snapshot.isPreparing ? "preparing" : snapshot.nextStop.id;
     if (currentState !== announcedState) {
       setText("live-update", snapshot.isComplete
         ? "Viagem concluída. O ônibus chegou a São Paulo."
-        : "Próxima parada: " + snapshot.nextStop.city + ", previsão " + snapshot.nextStopEta + ".");
+        : snapshot.isPreparing
+          ? "O ônibus está no terminal de origem, aguardando a saída."
+          : "Próxima parada: " + snapshot.nextStop.city + ", previsão " + snapshot.nextStopEta + ".");
       announcedState = currentState;
     }
     updateLastUpdateLabel();

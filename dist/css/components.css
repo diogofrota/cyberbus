@@ -1568,6 +1568,10 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.bottom-nav__inner.is-underway {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .bottom-nav__item {
   position: relative;
   display: flex;
@@ -2081,46 +2085,138 @@
 
 .terminal-map-wrap {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
   min-height: 0;
-  padding: 12px;
+  padding: 20px;
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgb(15 65 96 / 3%) 1px, transparent 1px),
-    linear-gradient(rgb(15 65 96 / 3%) 1px, transparent 1px),
-    #edf3f6;
-  background-size: 24px 24px;
+  background: radial-gradient(circle at 76% 30%, #ffffff 0, #f5f9fc 55%, #eaf3f7 100%);
 }
 
+/* Resumo lateral do caminho desativado.
+.terminal-map-guide {
+  width: 100%;
+  padding: 22px;
+  border: 1px solid #dce8ef;
+  border-radius: 20px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: var(--shadow-sm);
+}
+
+.terminal-map-guide__eyebrow {
+  display: block;
+  margin-bottom: 11px;
+  color: var(--blue-700);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.terminal-map-guide h2 {
+  margin-bottom: 8px;
+  color: var(--navy-900);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.terminal-map-guide p {
+  margin: 0 0 22px;
+  color: var(--ink-600);
+  font-size: 0.79rem;
+  line-height: 1.55;
+}
+
+.terminal-map-guide__progress,
+.terminal-map-guide__stops {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.terminal-map-guide__progress span {
+  height: 5px;
+  border-radius: 99px;
+  background: var(--blue-600);
+}
+
+.terminal-map-guide__progress span:last-child {
+  background: var(--navy-800);
+}
+
+.terminal-map-guide__stops {
+  margin-top: 9px;
+  color: var(--ink-500);
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.terminal-map-guide__stops strong {
+  color: var(--navy-900);
+}
+
+.terminal-map-guide__time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-700);
+  font-size: 0.73rem;
+  font-weight: 750;
+}
+
+.terminal-map-guide__time span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--blue-700);
+  background: var(--surface-blue);
+  font-size: 1rem;
+}
+*/
+
 .terminal-map {
-  width: min(100%, 440px);
+  width: min(100%, 420px);
   min-width: 0;
   height: auto;
   margin-inline: auto;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .terminal-map__floor > path:first-child {
   fill: white;
-  stroke: #bed0dc;
-  stroke-width: 3;
+  stroke: #cfdee8;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 9px 13px rgb(8 31 51 / 10%));
 }
 
 .terminal-map__floor > path:last-child {
-  fill: #f6f9fb;
-  stroke: #ccd9e1;
-  stroke-width: 2;
+  fill: #f4f8fb;
+  stroke: #dbe6ed;
+  stroke-width: 1.5;
 }
 
 .terminal-map__labels {
   fill: #4f6678;
   stroke: none;
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .terminal-map__labels .minor {
-  fill: #738999;
-  font-size: 12px;
+  fill: #788e9f;
+  font-size: 10.5px;
   font-weight: 600;
 }
 
@@ -2129,7 +2225,7 @@
 }
 
 .terminal-map__pois {
-  opacity: 0.32;
+  opacity: 0;
   transition: opacity 200ms ease;
 }
 
@@ -2153,31 +2249,30 @@
 .terminal-map__route-shadow {
   fill: none;
   stroke: white;
-  stroke-width: 17;
+  stroke-width: 12;
   transition: opacity 200ms ease;
 }
 
 .terminal-map__route {
   fill: none;
   stroke: var(--blue-600);
-  stroke-dasharray: 12 9;
-  stroke-width: 9;
-  animation: route-dash 1.2s linear infinite;
+  stroke-width: 5;
   transition: opacity 200ms ease, stroke 200ms ease;
 }
 
 .show-places .terminal-map__route-shadow,
 .show-places .terminal-map__route {
-  opacity: 0.3;
+  opacity: 0.18;
 }
 
 .is-guiding .terminal-map__route {
-  stroke: #00a9be;
-  stroke-dasharray: 18 8;
+  stroke: var(--blue-600);
+  stroke-dasharray: 9 7;
+  animation: route-dash 1s linear infinite;
 }
 
 @keyframes route-dash {
-  to { stroke-dashoffset: -42; }
+  to { stroke-dashoffset: -32; }
 }
 
 .terminal-map__you > circle:first-child {
@@ -2200,7 +2295,7 @@
 .terminal-map__destination circle {
   fill: var(--navy-800);
   stroke: white;
-  stroke-width: 5;
+  stroke-width: 3;
 }
 
 .terminal-map__destination path {
@@ -2222,14 +2317,19 @@
   font-weight: 800;
 }
 
+.terminal-map__callout {
+  display: none;
+}
+
 .map-legend {
+  grid-column: 1 / -1;
   position: static;
   display: flex;
   width: max-content;
   max-width: 100%;
   flex-wrap: nowrap;
   gap: 10px;
-  margin: 10px auto 0;
+  margin: 0 auto;
   padding: 8px 10px;
   border: 1px solid rgb(203 216 226 / 90%);
   border-radius: 11px;
@@ -2249,7 +2349,7 @@
 
 .legend-route {
   width: 16px;
-  border-top: 3px dashed var(--blue-600);
+  border-top: 3px solid var(--blue-600);
 }
 
 .legend-poi {
@@ -4467,6 +4567,7 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
 /* Trip evaluation */
 #trip-reset-note {
   margin-top: 18px;

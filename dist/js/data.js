@@ -99,6 +99,7 @@
     simulation: {
       initialProgress: 0,
       speed: 82,
+      preparationDuration: 60 * 1000,
       updateInterval: 1000,
       progressStep: 1,
       startedLabel: "17:12",

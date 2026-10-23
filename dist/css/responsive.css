@@ -308,6 +308,31 @@
   }
 }
 
+@media (max-width: 620px) {
+  .terminal-map-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .terminal-map {
+    width: min(100%, 380px);
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .map-legend {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* .terminal-map-guide {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 18px;
+  } */
+}
+
 @media (min-width: 920px) {
   .app-header__inner {
     min-height: 74px;

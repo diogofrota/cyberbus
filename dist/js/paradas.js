@@ -8,8 +8,9 @@
 
   function stopState(stop, snapshot) {
     if (snapshot.isComplete) return { key: "done", label: stop.type === "destination" ? "Destino alcançado" : stop.type === "origin" ? "Saída concluída" : "Parada concluída" };
+    if (stop.type === "origin") return snapshot.isPreparing ? { key: "next", label: "Saída prevista" } : { key: "done", label: "Saída concluída" };
     if (stop.progress < snapshot.progress) return { key: "done", label: stop.type === "origin" ? "Saída concluída" : "Parada concluída" };
-    if (stop.id === snapshot.nextStop.id) return { key: "next", label: "Próxima parada" };
+    if (!snapshot.isPreparing && stop.id === snapshot.nextStop.id) return { key: "next", label: "Próxima parada" };
     if (stop.type === "destination") return { key: "future", label: "Destino final" };
     return { key: "future", label: "Prevista" };
   }

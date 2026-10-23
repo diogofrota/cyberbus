@@ -179,6 +179,7 @@
       '<nav class="desktop-nav" aria-label="Navegação principal">' + links.map(function (entry) {
         var active = activeFor(page, entry[0]);
         var visibility = entry[3] === "trip" ? " data-trip-only" : entry[3] === "complete" ? " data-complete-only hidden" : "";
+        if (entry[0] === "onibus" || entry[0] === "rodoviaria") visibility += " data-preparing-only hidden";
         return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + visibility + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
       }).join("") + "</nav>" +
       '<a class="trip-code-pill" href="' + withTrip("viagem.html") + '" aria-label="Abrir viagem ' + escapeHtml(data.code) + '"><span></span>' + escapeHtml(data.code) + "</a>" +
@@ -196,7 +197,7 @@
     var stopsActive = ["paradas", "parada-detalhes"].indexOf(page) >= 0;
     mount.innerHTML = '<nav class="bottom-nav" aria-label="Navegação principal no celular"><div class="bottom-nav__inner">' +
       '<a class="bottom-nav__item' + (tripActive ? " is-active" : "") + '" href="' + withTrip("viagem.html") + '"' + (tripActive ? ' aria-current="page"' : "") + '>' + icon("home") + "<span>Viagem</span></a>" +
-      '<a class="bottom-nav__item' + (busActive ? " is-active" : "") + '" href="' + withTrip("onibus.html") + '" data-trip-only' + (busActive ? ' aria-current="page"' : "") + '>' + icon("bus") + "<span>Embarque</span></a>" +
+      '<a class="bottom-nav__item' + (busActive ? " is-active" : "") + '" href="' + withTrip("onibus.html") + '" data-trip-only data-preparing-only hidden' + (busActive ? ' aria-current="page"' : "") + '>' + icon("bus") + "<span>Embarque</span></a>" +
       '<a class="bottom-nav__item' + (routeActive ? " is-active" : "") + '" href="' + withTrip("rota.html") + '" data-trip-only' + (routeActive ? ' aria-current="page"' : "") + '>' + icon("route") + "<span>Rota</span></a>" +
       '<a class="bottom-nav__item' + (stopsActive ? " is-active" : "") + '" href="' + withTrip("paradas.html") + '" data-trip-only' + (stopsActive ? ' aria-current="page"' : "") + '>' + icon("stops") + "<span>Paradas</span></a>" +
       '<a class="bottom-nav__item' + (page === "avaliacao" ? " is-active" : "") + '" href="' + withTrip("avaliacao.html") + '" data-complete-only hidden' + (page === "avaliacao" ? ' aria-current="page"' : "") + '>' + icon("star") + "<span>Avaliar</span></a>" +
@@ -212,7 +213,7 @@
       '<div class="more-sheet__handle" aria-hidden="true"></div>' +
       '<div class="more-sheet__header"><div><p class="eyebrow">Outros recursos</p><h2 id="more-title">O que você precisa?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
       '<div class="more-sheet__grid">' +
-      '<a data-trip-only href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only data-preparing-only hidden href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only href="' + withTrip("estabelecimentos.html?stop=resende") + '"><span class="feature-icon feature-icon--amber">' + icon("store") + "</span><span><strong>Restaurantes e lojas</strong><small>Veja o que há nas paradas</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("clima.html") + '"><span class="feature-icon feature-icon--cyan">' + icon("weather") + "</span><span><strong>Clima na chegada</strong><small>Veja a previsão simulada no destino</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("roteiros.html") + '"><span class="feature-icon feature-icon--violet">' + icon("landmark") + "</span><span><strong>Roteiros turísticos</strong><small>Explore São Paulo após a viagem</small></span>" + icon("chevron") + "</a>" +
@@ -258,7 +259,7 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && document.body.classList.contains("sheet-open")) closeSheet();
       if (event.key === "Tab" && document.body.classList.contains("sheet-open")) {
-        var focusable = sheet.querySelectorAll('a[href], button:not([disabled])');
+        var focusable = sheet.querySelectorAll('a[href]:not([hidden]), button:not([disabled]):not([hidden])');
         var first = focusable[0];
         var last = focusable[focusable.length - 1];
         if (event.shiftKey && document.activeElement === first) {
@@ -272,21 +273,28 @@
     });
   }
 
-  var navigationComplete = null;
+  var navigationPhase = null;
 
   function updateTripNavigation(snapshot) {
     var complete = Boolean(snapshot.isComplete);
-    if (navigationComplete === complete) return;
-    navigationComplete = complete;
+    var preparing = Boolean(snapshot.isPreparing) && !complete;
+    var phase = complete ? "complete" : preparing ? "preparing" : "underway";
+    if (navigationPhase === phase) return;
+    navigationPhase = phase;
     document.querySelectorAll("[data-trip-only]").forEach(function (element) { element.hidden = complete; });
+    document.querySelectorAll("[data-preparing-only]").forEach(function (element) { element.hidden = !preparing; });
     document.querySelectorAll("[data-complete-only]").forEach(function (element) { element.hidden = !complete; });
     var bottomNav = document.querySelector(".bottom-nav__inner");
-    if (bottomNav) bottomNav.classList.toggle("is-complete", complete);
+    if (bottomNav) {
+      bottomNav.classList.toggle("is-complete", complete);
+      bottomNav.classList.toggle("is-underway", !complete && !preparing);
+    }
     var title = document.getElementById("more-title");
     if (title) title.textContent = complete ? "Depois da chegada" : "O que você precisa?";
-    if (complete && document.activeElement && document.activeElement.hidden) {
-      var closeButton = document.querySelector("[data-close-more]");
-      if (closeButton && !closeButton.hidden) closeButton.focus();
+    if (document.activeElement && document.activeElement.hidden) {
+      var sheet = document.querySelector(".more-sheet");
+      var focusTarget = sheet && !sheet.hidden ? sheet.querySelector("[data-close-more]") : document.querySelector(".trip-code-pill");
+      if (focusTarget) focusTarget.focus();
     }
   }
 

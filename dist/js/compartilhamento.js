@@ -33,8 +33,8 @@
   });
 
   function renderPreview(snapshot) {
-    var statusLabel = snapshot.isComplete ? "Viagem concluída" : "Em viagem";
-    var nextLabel = snapshot.isComplete ? "Destino alcançado" : "Próxima parada";
+    var statusLabel = snapshot.isComplete ? "Viagem concluída" : snapshot.isPreparing ? "Aguardando saída" : "Em viagem";
+    var nextLabel = snapshot.isComplete ? "Destino alcançado" : snapshot.isPreparing ? "Primeira parada" : "Próxima parada";
     app.renderHtml(preview, '<div class="phone-preview"><div class="phone-preview__speaker"></div><div class="phone-preview__header">' + app.brandMarkup(false) + '<span>Acompanhamento público</span></div><div class="phone-preview__body"><span class="badge badge--success"><i></i>' + statusLabel + '</span><p>Acompanhando</p><h2>' + app.escapeHtml(data.route.origin) + ' <span>→</span><br>' + app.escapeHtml(data.route.destination) + '</h2><div class="phone-preview__route" style="--preview-progress:' + snapshot.progress + '%"><i></i><i></i><i></i><span style="left:' + snapshot.progress + '%">' + app.icon("bus") + '</span></div><div class="phone-preview__info"><small>Chegada prevista</small><strong>' + snapshot.finalEta + '</strong><small>' + nextLabel + '</small><strong class="' + (!snapshot.isComplete ? "is-next" : "") + '">' + app.escapeHtml(snapshot.nextStop.city) + '</strong></div></div></div><a class="button button--primary button--full" href="' + navigationUrl + '"><span class="button__label">Visualizar como familiar</span>' + app.icon("external", "button__arrow") + '</a><div class="share-privacy">' + app.icon("shield") + '<p><strong>O que fica privado</strong><span>O link não mostra nome, assento, documento ou dados pessoais do passageiro.</span></p></div>');
   }
 

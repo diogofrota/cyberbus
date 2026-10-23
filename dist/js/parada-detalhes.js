@@ -16,7 +16,7 @@
 
   function render(snapshot) {
     var distanceToStop = Math.max(0, stop.distanceFromOrigin - snapshot.distanceTravelled);
-    var statusLabel = (snapshot.isComplete || stop.progress < snapshot.progress) ? (stop.type === "destination" ? "Destino alcançado" : "Parada concluída") : stop.id === snapshot.nextStop.id ? "Próxima parada" : "Parada prevista";
+    var statusLabel = stop.type === "origin" ? (snapshot.isPreparing ? "Saída prevista" : "Saída concluída") : (snapshot.isComplete || stop.progress < snapshot.progress) ? (stop.type === "destination" ? "Destino alcançado" : "Parada concluída") : stop.id === snapshot.nextStop.id && !snapshot.isPreparing ? "Próxima parada" : "Parada prevista";
     var displayEta = stop.id === snapshot.nextStop.id ? snapshot.nextStopEta : (stop.estimated || stop.actual || stop.scheduled);
     var hasBusinesses = data.establishments.some(function (item) { return item.stopId === stop.id; });
     var catalogUrl = hasBusinesses ? "estabelecimentos.html?stop=" + stop.id : "estabelecimentos.html?stop=resende";

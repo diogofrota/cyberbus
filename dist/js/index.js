@@ -26,7 +26,7 @@
     setPreviewText("[data-preview-destination-code]", data.route.destinationCode);
     setPreviewText("[data-preview-destination]", data.route.destination);
     setPreviewText("[data-preview-destination-terminal]", data.route.destinationTerminal);
-    setPreviewText("[data-preview-status]", data.status && data.status.label);
+    setPreviewText("[data-preview-status]", "Embarque confirmado");
     setPreviewText("[data-preview-platform]", "Plataforma " + data.route.platform);
     if (preview) preview.setAttribute("aria-label", "Prévia da viagem " + data.route.origin + " para " + data.route.destination);
     if (fillButton && data.code) {
@@ -78,6 +78,12 @@
       error.hidden = false;
       input.focus();
       return;
+    }
+
+    try {
+      window.localStorage.removeItem("cyberbus-simulation-v3-" + code);
+    } catch (storageError) {
+      // A simulação continua funcionando sem armazenamento local.
     }
 
     var submitButton = form.querySelector('button[type="submit"]');

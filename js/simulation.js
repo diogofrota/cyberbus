@@ -3,12 +3,13 @@
 
   var data = window.CYBERBUS_DATA;
   var config = data.simulation;
-  var storageKey = "cyberbus-simulation-v2-" + data.code;
+  var storageKey = "cyberbus-simulation-v3-" + data.code;
   var sessionTtl = Infinity;
   var memorySession = null;
+  var preparationDuration = config.preparationDuration;
   var completionHold = 60 * 1000;
   var tripDuration = Math.ceil((100 - config.initialProgress) / config.progressStep) * config.updateInterval;
-  var cycleDuration = tripDuration + completionHold;
+  var cycleDuration = preparationDuration + tripDuration + completionHold;
   var geographicPath = Array.isArray(data.route.mapPath) && data.route.mapPath.length > 1
     ? data.route.mapPath
     : data.stops.map(function (stop) { return stop.coordinates; });
@@ -52,8 +53,8 @@
     return memorySession;
   }
 
-  function progressAt(elapsedInCycle, session) {
-    var elapsedSteps = Math.floor(elapsedInCycle / config.updateInterval);
+  function progressAt(tripElapsed, session) {
+    var elapsedSteps = Math.floor(tripElapsed / config.updateInterval);
     return Math.min(100, session.startProgress + (elapsedSteps * config.progressStep));
   }
 
@@ -122,9 +123,11 @@
     var elapsed = Math.max(0, now - session.startedAt);
     var cycleId = Math.floor(elapsed / cycleDuration);
     var elapsedInCycle = elapsed % cycleDuration;
-    var elapsedSteps = Math.floor(elapsedInCycle / config.updateInterval);
-    var progress = progressAt(elapsedInCycle, session);
-    var isComplete = elapsedInCycle >= tripDuration;
+    var isPreparing = elapsedInCycle < preparationDuration;
+    var tripElapsed = Math.max(0, elapsedInCycle - preparationDuration);
+    var elapsedSteps = Math.floor(tripElapsed / config.updateInterval);
+    var progress = progressAt(tripElapsed, session);
+    var isComplete = tripElapsed >= tripDuration;
     var nextStop = data.stops.find(function (stop) { return stop.progress > progress; }) || data.stops[data.stops.length - 1];
     var previousStop = data.stops.slice().reverse().find(function (stop) { return stop.progress <= progress; }) || data.stops[0];
     var distanceTravelled = Math.round(data.route.totalDistance * (progress / 100));
@@ -139,7 +142,7 @@
       distanceTravelled: distanceTravelled,
       distanceRemaining: Math.max(0, data.route.totalDistance - distanceTravelled),
       distanceToNextStop: Math.max(0, nextStop.distanceFromOrigin - distanceTravelled),
-      speed: progress >= 100 ? 0 : config.speed + speedPulse,
+      speed: isPreparing || progress >= 100 ? 0 : config.speed + speedPulse,
       nextStop: nextStop,
       nextStopEta: timeWithOffset(nextStopBaseEta, etaOffset),
       previousStop: previousStop,
@@ -148,9 +151,11 @@
       geoPosition: geographicPosition.position,
       geoSegmentIndex: geographicPosition.segmentIndex,
       simulatedClock: formatSimulatedClock(progress),
+      isPreparing: isPreparing,
       isComplete: isComplete,
       cycleId: cycleId,
       cycleStartedAt: session.startedAt + cycleId * cycleDuration,
+      secondsUntilDeparture: isPreparing ? Math.ceil((preparationDuration - elapsedInCycle) / 1000) : null,
       secondsUntilReset: isComplete ? Math.ceil((cycleDuration - elapsedInCycle) / 1000) : null,
       updatedAt: now
     };
