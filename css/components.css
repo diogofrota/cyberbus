@@ -1109,6 +1109,10 @@
   gap: 14px;
 }
 
+.trip-hero__top {
+  justify-content: flex-end;
+}
+
 .trip-hero__company {
   display: none;
   align-items: center;

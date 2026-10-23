@@ -545,6 +545,10 @@
     margin-right: auto;
   }
 
+  .trip-hero__route {
+    padding-top: 0;
+  }
+
   .trip-hero__route > div:not(.trip-hero__path) > span {
     font-size: 2rem;
   }
