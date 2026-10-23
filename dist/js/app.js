@@ -2,6 +2,7 @@
   "use strict";
 
   var data = window.CYBERBUS_DATA || {};
+  var siteVersion = "20261023b";
 
   var icons = {
     home: '<path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5M9.5 20v-6h5v6"></path>',
@@ -61,7 +62,7 @@
 
   function withTrip(url) {
     var separator = url.indexOf("?") >= 0 ? "&" : "?";
-    return url + separator + "trip=" + encodeURIComponent(data.code || "BR1024");
+    return url + separator + "trip=" + encodeURIComponent(data.code || "BR1024") + "&v=" + siteVersion;
   }
 
   function getStop(id) {
@@ -149,7 +150,7 @@
   }
 
   function brandMarkup(light) {
-    return '<a class="brand ' + (light ? "brand--light" : "") + '" href="index.html" aria-label="CyberBus — início">' +
+    return '<a class="brand ' + (light ? "brand--light" : "") + '" href="index.html?v=' + siteVersion + '" aria-label="CyberBus — início">' +
       '<span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7.5 7.5h13a4 4 0 0 1 4 4v9.25a2.75 2.75 0 0 1-2.75 2.75H9.5a3 3 0 0 1-3-3v-12a1 1 0 0 1 1-1Z"></path><path d="M9.5 11h11.75v6.5H9.5z"></path><path d="M11 23.5v2M21 23.5v2M6.5 19h18M24.5 13h1.75"></path></svg></span>' +
       '<span>Cyber<span>Bus</span></span></a>';
   }
@@ -217,7 +218,7 @@
       '<div class="more-sheet__header"><div><p class="eyebrow">Menu</p><h2 id="more-title">Para onde você quer ir?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
       '<nav class="more-sheet__grid" aria-label="Páginas da viagem">' +
       '<p class="eyebrow more-sheet__section-label">Navegação</p>' +
-      '<a href="index.html"><span class="feature-icon">' + icon("home") + "</span><span><strong>Início</strong><small>Consultar outra viagem</small></span>" + icon("chevron") + "</a>" +
+      '<a href="index.html?v=' + siteVersion + '"><span class="feature-icon">' + icon("home") + "</span><span><strong>Início</strong><small>Consultar outra viagem</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("viagem.html") + '"' + (page === "viagem" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("ticket") + "</span><span><strong>Minha viagem</strong><small>Resumo e detalhes da viagem</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only data-preparing-only hidden href="' + withTrip("onibus.html") + '"' + (page === "onibus" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("bus") + "</span><span><strong>Ônibus e embarque</strong><small>Veja os dados do seu ônibus</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only data-preparing-only hidden href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
@@ -311,7 +312,7 @@
   function injectFooter() {
     var mount = document.querySelector("[data-app-footer]");
     if (!mount) return;
-    mount.innerHTML = '<footer class="app-footer container"><span>CyberBus · Protótipo demonstrativo</span><a href="index.html">Consultar outra viagem</a></footer>';
+    mount.innerHTML = '<footer class="app-footer container"><span>CyberBus · Protótipo demonstrativo</span><a href="index.html?v=' + siteVersion + '">Consultar outra viagem</a></footer>';
   }
 
   function markPageReady() {

@@ -91,7 +91,7 @@
     window.CyberBus.showToast("Viagem encontrada", "Preparando seus dados de embarque…", "success");
 
     window.setTimeout(function () {
-      window.location.href = "viagem.html?trip=" + encodeURIComponent(code);
+      window.location.href = "viagem.html?trip=" + encodeURIComponent(code) + "&v=20261023b";
     }, 900);
   });
 }());
