@@ -841,7 +841,7 @@
   transform: scaleX(1);
 }
 
-.trip-code-pill {
+.app-header__home-link {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -853,15 +853,18 @@
   background: var(--surface-soft);
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
 }
 
-.trip-code-pill span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--success-600);
-  box-shadow: 0 0 0 4px rgb(14 152 112 / 10%);
+.app-header__home-link svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.app-header__home-link:hover {
+  border-color: #aac3d6;
+  color: var(--blue-700);
+  background: var(--surface-blue);
 }
 
 .app-main {

@@ -182,7 +182,7 @@
         if (entry[0] === "onibus" || entry[0] === "rodoviaria") visibility += " data-preparing-only hidden";
         return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + visibility + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
       }).join("") + "</nav>" +
-      '<a class="trip-code-pill" href="' + withTrip("viagem.html") + '" aria-label="Abrir viagem ' + escapeHtml(data.code) + '"><span></span>' + escapeHtml(data.code) + "</a>" +
+      '<a class="app-header__home-link" href="index.html" aria-label="Ir para a página inicial">' + icon("home") + "Início</a>" +
       "</div></header>";
   }
 
@@ -293,7 +293,7 @@
     if (title) title.textContent = complete ? "Depois da chegada" : "O que você precisa?";
     if (document.activeElement && document.activeElement.hidden) {
       var sheet = document.querySelector(".more-sheet");
-      var focusTarget = sheet && !sheet.hidden ? sheet.querySelector("[data-close-more]") : document.querySelector(".trip-code-pill");
+      var focusTarget = sheet && !sheet.hidden ? sheet.querySelector("[data-close-more]") : document.querySelector(".app-header__home-link");
       if (focusTarget) focusTarget.focus();
     }
   }
