@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="assets/images/bus-cyberbus.jpg" alt="Ônibus azul da demonstração CyberBus em uma rodoviária" width="860">
   <h1>CyberBus</h1>
   <p><strong>Sua viagem, sempre por perto.</strong></p>
   <p>Um protótipo interativo para acompanhar uma viagem rodoviária do embarque à chegada.</p>
