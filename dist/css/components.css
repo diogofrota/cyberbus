@@ -1564,6 +1564,10 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
+.bottom-nav__inner.is-complete {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .bottom-nav__item {
   position: relative;
   display: flex;
@@ -4462,4 +4466,195 @@
   color: var(--blue-700);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+/* Trip evaluation */
+#trip-reset-note {
+  margin-top: 18px;
+}
+
+.evaluation-layout {
+  margin-top: 0;
+}
+
+.evaluation-form {
+  padding: clamp(20px, 4vw, 30px);
+}
+
+.evaluation-criterion {
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 22px;
+  border: 0;
+}
+
+.evaluation-criterion + .evaluation-criterion {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.evaluation-criterion legend {
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.evaluation-criterion > p {
+  margin: 2px 0 13px;
+  color: var(--ink-600);
+  font-size: 0.78rem;
+}
+
+.evaluation-rating {
+  display: flex;
+  max-width: 360px;
+  gap: 7px;
+}
+
+.evaluation-rating__option {
+  display: grid;
+  min-width: 0;
+  min-height: 56px;
+  flex: 1 1 0;
+  align-content: center;
+  justify-items: center;
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink-600);
+  background: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.evaluation-rating__option:hover,
+.evaluation-rating__option.is-selected {
+  border-color: #eacb7d;
+  color: #8b5a06;
+  background: #fff9e9;
+}
+
+.evaluation-rating__icon {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+}
+
+.evaluation-rating__icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.evaluation-rating__option.is-selected svg {
+  fill: #f4bf45;
+  stroke: #be8710;
+}
+
+.evaluation-rating__option input:focus-visible + .evaluation-rating__icon {
+  border-radius: 4px;
+  outline: 3px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+.evaluation-comment {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.evaluation-comment .field-label span {
+  color: var(--ink-500);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.evaluation-comment textarea {
+  display: block;
+  width: 100%;
+  min-height: 110px;
+  padding: 13px 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  outline: none;
+  background: var(--surface);
+  font-size: 0.88rem;
+  resize: vertical;
+}
+
+.evaluation-comment textarea:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 4px rgb(35 130 247 / 12%);
+}
+
+.evaluation-comment__count {
+  margin: 6px 0 20px;
+  color: var(--ink-500);
+  font-size: 0.72rem;
+  text-align: right;
+}
+
+.evaluation-form__note {
+  margin: 13px 0 0;
+  color: var(--ink-600);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.evaluation-feedback {
+  border-color: #a9dfc8;
+  color: var(--success-700);
+  background: var(--success-100);
+}
+
+.evaluation-feedback strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.evaluation-trip-card > p {
+  margin: 18px 0;
+  color: var(--ink-600);
+  font-size: 0.82rem;
+}
+
+.evaluation-trip-card dl {
+  margin: 0;
+}
+
+.evaluation-trip-card dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+}
+
+.evaluation-trip-card dt {
+  color: var(--ink-500);
+}
+
+.evaluation-trip-card dd {
+  margin: 0;
+  font-weight: 800;
+}
+
+.evaluation-timer-card h2 {
+  margin: 2px 0 10px;
+  font-size: 1.05rem;
+}
+
+.evaluation-timer-card > strong {
+  display: block;
+  color: var(--navy-900);
+  font-size: clamp(2.3rem, 9vw, 3.2rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.evaluation-timer-card > p:last-child {
+  margin: 14px 0 0;
+  color: var(--ink-600);
+  font-size: 0.78rem;
 }

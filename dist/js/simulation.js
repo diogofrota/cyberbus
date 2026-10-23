@@ -3,9 +3,12 @@
 
   var data = window.CYBERBUS_DATA;
   var config = data.simulation;
-  var storageKey = "cyberbus-simulation-" + data.code;
-  var sessionTtl = 12 * 60 * 1000;
+  var storageKey = "cyberbus-simulation-v2-" + data.code;
+  var sessionTtl = Infinity;
   var memorySession = null;
+  var completionHold = 60 * 1000;
+  var tripDuration = Math.ceil((100 - config.initialProgress) / config.progressStep) * config.updateInterval;
+  var cycleDuration = tripDuration + completionHold;
   var geographicPath = Array.isArray(data.route.mapPath) && data.route.mapPath.length > 1
     ? data.route.mapPath
     : data.stops.map(function (stop) { return stop.coordinates; });
@@ -36,21 +39,21 @@
   function readSession() {
     try {
       var stored = JSON.parse(window.localStorage.getItem(storageKey));
-      if (stored && Number.isFinite(stored.startedAt) && Number.isFinite(stored.startProgress) && (Date.now() - stored.startedAt) < sessionTtl) {
+      if (stored && Number.isFinite(stored.startedAt) && stored.startedAt <= Date.now() && stored.startProgress === config.initialProgress && (Date.now() - stored.startedAt) < sessionTtl) {
         memorySession = stored;
         return stored;
       }
     } catch (error) {
       // Storage is optional in this prototype.
     }
-    if (memorySession && (Date.now() - memorySession.startedAt) < sessionTtl) return memorySession;
+    if (memorySession && memorySession.startedAt <= Date.now() && (Date.now() - memorySession.startedAt) < sessionTtl) return memorySession;
     memorySession = { startedAt: Date.now(), startProgress: config.initialProgress };
     try { window.localStorage.setItem(storageKey, JSON.stringify(memorySession)); } catch (error) { /* noop */ }
     return memorySession;
   }
 
-  function progressAt(timestamp, session) {
-    var elapsedSteps = Math.floor(Math.max(0, timestamp - session.startedAt) / config.updateInterval);
+  function progressAt(elapsedInCycle, session) {
+    var elapsedSteps = Math.floor(elapsedInCycle / config.updateInterval);
     return Math.min(100, session.startProgress + (elapsedSteps * config.progressStep));
   }
 
@@ -116,8 +119,12 @@
   function snapshot() {
     var now = Date.now();
     var session = readSession();
-    var elapsedSteps = Math.floor(Math.max(0, now - session.startedAt) / config.updateInterval);
-    var progress = progressAt(now, session);
+    var elapsed = Math.max(0, now - session.startedAt);
+    var cycleId = Math.floor(elapsed / cycleDuration);
+    var elapsedInCycle = elapsed % cycleDuration;
+    var elapsedSteps = Math.floor(elapsedInCycle / config.updateInterval);
+    var progress = progressAt(elapsedInCycle, session);
+    var isComplete = elapsedInCycle >= tripDuration;
     var nextStop = data.stops.find(function (stop) { return stop.progress > progress; }) || data.stops[data.stops.length - 1];
     var previousStop = data.stops.slice().reverse().find(function (stop) { return stop.progress <= progress; }) || data.stops[0];
     var distanceTravelled = Math.round(data.route.totalDistance * (progress / 100));
@@ -141,7 +148,10 @@
       geoPosition: geographicPosition.position,
       geoSegmentIndex: geographicPosition.segmentIndex,
       simulatedClock: formatSimulatedClock(progress),
-      isComplete: progress >= 100,
+      isComplete: isComplete,
+      cycleId: cycleId,
+      cycleStartedAt: session.startedAt + cycleId * cycleDuration,
+      secondsUntilReset: isComplete ? Math.ceil((cycleDuration - elapsedInCycle) / 1000) : null,
       updatedAt: now
     };
   }

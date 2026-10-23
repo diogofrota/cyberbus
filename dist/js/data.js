@@ -97,10 +97,10 @@
       experience: "12 anos de experiência"
     },
     simulation: {
-      initialProgress: 45,
+      initialProgress: 0,
       speed: 82,
-      updateInterval: 5000,
-      progressStep: 0.7,
+      updateInterval: 1000,
+      progressStep: 1,
       startedLabel: "17:12",
       polyline: [
         [6, 78], [14, 71], [23, 69], [31, 62], [39, 57],

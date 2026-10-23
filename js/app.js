@@ -165,17 +165,21 @@
     var page = document.body.dataset.page || "viagem";
     var links = [
       ["viagem", "viagem.html", "Viagem"],
-      ["onibus", "onibus.html", "Ônibus"],
-      ["rodoviaria", "rodoviaria.html", "Rodoviária"],
-      ["rota", "rota.html", "Rota"],
-      ["paradas", "paradas.html", "Paradas"],
-      ["compartilhar", "compartilhar.html", "Compartilhar"]
+      ["onibus", "onibus.html", "Ônibus", "trip"],
+      ["rodoviaria", "rodoviaria.html", "Rodoviária", "trip"],
+      ["rota", "rota.html", "Rota", "trip"],
+      ["paradas", "paradas.html", "Paradas", "trip"],
+      ["compartilhar", "compartilhar.html", "Compartilhar", "trip"],
+      ["clima", "clima.html", "Clima", "complete"],
+      ["roteiros", "roteiros.html", "Roteiros", "complete"],
+      ["avaliacao", "avaliacao.html", "Avaliação", "complete"]
     ];
     mount.innerHTML = '<header class="app-header"><div class="container app-header__inner">' +
       brandMarkup(false) +
       '<nav class="desktop-nav" aria-label="Navegação principal">' + links.map(function (entry) {
         var active = activeFor(page, entry[0]);
-        return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
+        var visibility = entry[3] === "trip" ? " data-trip-only" : entry[3] === "complete" ? " data-complete-only hidden" : "";
+        return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + visibility + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
       }).join("") + "</nav>" +
       '<a class="trip-code-pill" href="' + withTrip("viagem.html") + '" aria-label="Abrir viagem ' + escapeHtml(data.code) + '"><span></span>' + escapeHtml(data.code) + "</a>" +
       "</div></header>";
@@ -192,9 +196,10 @@
     var stopsActive = ["paradas", "parada-detalhes"].indexOf(page) >= 0;
     mount.innerHTML = '<nav class="bottom-nav" aria-label="Navegação principal no celular"><div class="bottom-nav__inner">' +
       '<a class="bottom-nav__item' + (tripActive ? " is-active" : "") + '" href="' + withTrip("viagem.html") + '"' + (tripActive ? ' aria-current="page"' : "") + '>' + icon("home") + "<span>Viagem</span></a>" +
-      '<a class="bottom-nav__item' + (busActive ? " is-active" : "") + '" href="' + withTrip("onibus.html") + '"' + (busActive ? ' aria-current="page"' : "") + '>' + icon("bus") + "<span>Embarque</span></a>" +
-      '<a class="bottom-nav__item' + (routeActive ? " is-active" : "") + '" href="' + withTrip("rota.html") + '"' + (routeActive ? ' aria-current="page"' : "") + '>' + icon("route") + "<span>Rota</span></a>" +
-      '<a class="bottom-nav__item' + (stopsActive ? " is-active" : "") + '" href="' + withTrip("paradas.html") + '"' + (stopsActive ? ' aria-current="page"' : "") + '>' + icon("stops") + "<span>Paradas</span></a>" +
+      '<a class="bottom-nav__item' + (busActive ? " is-active" : "") + '" href="' + withTrip("onibus.html") + '" data-trip-only' + (busActive ? ' aria-current="page"' : "") + '>' + icon("bus") + "<span>Embarque</span></a>" +
+      '<a class="bottom-nav__item' + (routeActive ? " is-active" : "") + '" href="' + withTrip("rota.html") + '" data-trip-only' + (routeActive ? ' aria-current="page"' : "") + '>' + icon("route") + "<span>Rota</span></a>" +
+      '<a class="bottom-nav__item' + (stopsActive ? " is-active" : "") + '" href="' + withTrip("paradas.html") + '" data-trip-only' + (stopsActive ? ' aria-current="page"' : "") + '>' + icon("stops") + "<span>Paradas</span></a>" +
+      '<a class="bottom-nav__item' + (page === "avaliacao" ? " is-active" : "") + '" href="' + withTrip("avaliacao.html") + '" data-complete-only hidden' + (page === "avaliacao" ? ' aria-current="page"' : "") + '>' + icon("star") + "<span>Avaliar</span></a>" +
       '<button class="bottom-nav__item' + (moreActive ? " is-active" : "") + '" type="button" data-open-more aria-haspopup="dialog" aria-expanded="false">' + icon("more") + "<span>Mais</span></button>" +
       "</div></nav>";
   }
@@ -207,12 +212,13 @@
       '<div class="more-sheet__handle" aria-hidden="true"></div>' +
       '<div class="more-sheet__header"><div><p class="eyebrow">Outros recursos</p><h2 id="more-title">O que você precisa?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
       '<div class="more-sheet__grid">' +
-      '<a href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
-      '<a href="' + withTrip("estabelecimentos.html?stop=resende") + '"><span class="feature-icon feature-icon--amber">' + icon("store") + "</span><span><strong>Restaurantes e lojas</strong><small>Veja o que há nas paradas</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only href="' + withTrip("estabelecimentos.html?stop=resende") + '"><span class="feature-icon feature-icon--amber">' + icon("store") + "</span><span><strong>Restaurantes e lojas</strong><small>Veja o que há nas paradas</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("clima.html") + '"><span class="feature-icon feature-icon--cyan">' + icon("weather") + "</span><span><strong>Clima na chegada</strong><small>Veja a previsão simulada no destino</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("roteiros.html") + '"><span class="feature-icon feature-icon--violet">' + icon("landmark") + "</span><span><strong>Roteiros turísticos</strong><small>Explore São Paulo após a viagem</small></span>" + icon("chevron") + "</a>" +
-      '<a href="' + withTrip("compartilhar.html") + '"><span class="feature-icon feature-icon--green">' + icon("share") + "</span><span><strong>Compartilhar viagem</strong><small>Mantenha a família informada</small></span>" + icon("chevron") + "</a>" +
-      '<a class="more-sheet__danger" href="' + withTrip("emergencia.html") + '"><span class="feature-icon feature-icon--red">' + icon("alert") + "</span><span><strong>Emergência</strong><small>Dados e suporte da viagem</small></span>" + icon("chevron") + "</a>" +
+      '<a data-complete-only hidden href="' + withTrip("avaliacao.html") + '"><span class="feature-icon feature-icon--green">' + icon("star") + "</span><span><strong>Avaliar viagem</strong><small>Conte como foi sua experiência</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only href="' + withTrip("compartilhar.html") + '"><span class="feature-icon feature-icon--green">' + icon("share") + "</span><span><strong>Compartilhar viagem</strong><small>Mantenha a família informada</small></span>" + icon("chevron") + "</a>" +
+      '<a data-trip-only class="more-sheet__danger" href="' + withTrip("emergencia.html") + '"><span class="feature-icon feature-icon--red">' + icon("alert") + "</span><span><strong>Emergência</strong><small>Dados e suporte da viagem</small></span>" + icon("chevron") + "</a>" +
       "</div></section>";
 
     var sheet = mount.querySelector(".more-sheet");
@@ -266,6 +272,24 @@
     });
   }
 
+  var navigationComplete = null;
+
+  function updateTripNavigation(snapshot) {
+    var complete = Boolean(snapshot.isComplete);
+    if (navigationComplete === complete) return;
+    navigationComplete = complete;
+    document.querySelectorAll("[data-trip-only]").forEach(function (element) { element.hidden = complete; });
+    document.querySelectorAll("[data-complete-only]").forEach(function (element) { element.hidden = !complete; });
+    var bottomNav = document.querySelector(".bottom-nav__inner");
+    if (bottomNav) bottomNav.classList.toggle("is-complete", complete);
+    var title = document.getElementById("more-title");
+    if (title) title.textContent = complete ? "Depois da chegada" : "O que você precisa?";
+    if (complete && document.activeElement && document.activeElement.hidden) {
+      var closeButton = document.querySelector("[data-close-more]");
+      if (closeButton && !closeButton.hidden) closeButton.focus();
+    }
+  }
+
   function injectFooter() {
     var mount = document.querySelector("[data-app-footer]");
     if (!mount) return;
@@ -295,6 +319,9 @@
     injectBottomNav();
     injectMoreSheet();
     injectFooter();
+    if (document.body.classList.contains("app-page") && window.CyberBusSimulation) {
+      window.CyberBusSimulation.subscribe(updateTripNavigation);
+    }
     markPageReady();
   }
 
