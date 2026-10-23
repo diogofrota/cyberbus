@@ -182,7 +182,7 @@
         if (entry[0] === "onibus" || entry[0] === "rodoviaria") visibility += " data-preparing-only hidden";
         return '<a class="desktop-nav__link' + active + '" href="' + withTrip(entry[1]) + '"' + visibility + (active ? ' aria-current="page"' : "") + '>' + escapeHtml(entry[2]) + "</a>";
       }).join("") + "</nav>" +
-      '<a class="app-header__home-link" href="index.html" aria-label="Ir para a página inicial">' + icon("home") + "Início</a>" +
+      '<a class="app-header__home-link" href="' + withTrip("viagem.html") + '" aria-label="Abrir minha viagem">' + icon("home") + "Início</a>" +
       "</div></header>";
   }
 
