@@ -2,7 +2,7 @@
   "use strict";
 
   var data = window.CYBERBUS_DATA || {};
-  var siteVersion = "20261023b";
+  var siteVersion = "20261023c";
 
   var icons = {
     home: '<path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5M9.5 20v-6h5v6"></path>',

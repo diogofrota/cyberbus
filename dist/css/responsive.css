@@ -557,6 +557,17 @@
     max-width: 92px;
   }
 
+  .trip-hero__path small {
+    top: calc(100% + 4px);
+    bottom: auto;
+    left: 50%;
+    width: max-content;
+    max-width: none;
+    text-align: center;
+    white-space: nowrap;
+    transform: translateX(-50%);
+  }
+
   .travel-map__labels .map-stop {
     display: none;
   }
@@ -603,6 +614,14 @@
 }
 
 @media (max-width: 360px) {
+  .trip-hero__route {
+    padding-bottom: 42px;
+  }
+
+  .trip-hero__path small {
+    top: calc(100% + 24px);
+  }
+
   .terminal-map-wrap {
     padding: 8px;
   }
