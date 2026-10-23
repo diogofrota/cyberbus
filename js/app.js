@@ -2,7 +2,7 @@
   "use strict";
 
   var data = window.CYBERBUS_DATA || {};
-  var siteVersion = "20261023c";
+  var siteVersion = "20261023d";
 
   var icons = {
     home: '<path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5M9.5 20v-6h5v6"></path>',
@@ -218,8 +218,8 @@
       '<div class="more-sheet__header"><div><p class="eyebrow">Menu</p><h2 id="more-title">Para onde você quer ir?</h2></div><button class="icon-button" type="button" data-close-more aria-label="Fechar menu">' + icon("close") + "</button></div>" +
       '<nav class="more-sheet__grid" aria-label="Páginas da viagem">' +
       '<p class="eyebrow more-sheet__section-label">Navegação</p>' +
-      '<a href="index.html?v=' + siteVersion + '"><span class="feature-icon">' + icon("home") + "</span><span><strong>Início</strong><small>Consultar outra viagem</small></span>" + icon("chevron") + "</a>" +
-      '<a href="' + withTrip("viagem.html") + '"' + (page === "viagem" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("ticket") + "</span><span><strong>Minha viagem</strong><small>Resumo e detalhes da viagem</small></span>" + icon("chevron") + "</a>" +
+      '<a href="' + withTrip("viagem.html") + '"' + (page === "viagem" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("home") + "</span><span><strong>Início</strong><small>Resumo da minha viagem</small></span>" + icon("chevron") + "</a>" +
+      // '<a href="' + withTrip("viagem.html") + '"' + (page === "viagem" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("ticket") + "</span><span><strong>Minha viagem</strong><small>Resumo e detalhes da viagem</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only data-preparing-only hidden href="' + withTrip("onibus.html") + '"' + (page === "onibus" ? ' aria-current="page"' : "") + '><span class="feature-icon">' + icon("bus") + "</span><span><strong>Ônibus e embarque</strong><small>Veja os dados do seu ônibus</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only data-preparing-only hidden href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
       '<a data-trip-only href="' + withTrip("rota.html") + '"' + (page === "rota" ? ' aria-current="page"' : "") + '><span class="feature-icon feature-icon--cyan">' + icon("route") + "</span><span><strong>Rota</strong><small>Acompanhe o trajeto</small></span>" + icon("chevron") + "</a>" +
