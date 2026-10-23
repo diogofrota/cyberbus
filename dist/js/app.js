@@ -2,7 +2,7 @@
   "use strict";
 
   var data = window.CYBERBUS_DATA || {};
-  var siteVersion = "20261023d";
+  var siteVersion = "20261023e";
 
   var icons = {
     home: '<path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5M9.5 20v-6h5v6"></path>',
@@ -234,6 +234,7 @@
       "</nav></section>";
 
     var sheet = mount.querySelector(".more-sheet");
+    var grid = mount.querySelector(".more-sheet__grid");
     var backdrop = mount.querySelector(".sheet-backdrop");
     var opener = document.querySelector("[data-open-more]");
     var closeButtons = mount.querySelectorAll("[data-close-more]");
@@ -248,8 +249,9 @@
       if (opener) opener.setAttribute("aria-expanded", "true");
       void sheet.offsetHeight;
       document.body.classList.add("sheet-open");
+      grid.scrollTop = 0;
       requestAnimationFrame(function () {
-        sheet.querySelector("[data-close-more]").focus();
+        sheet.querySelector("[data-close-more]").focus({ preventScroll: true });
       });
     }
 

@@ -1641,7 +1641,8 @@
   bottom: 0;
   left: 0;
   max-height: min(720px, 88vh);
-  overflow-y: auto;
+  max-height: min(720px, 88dvh, calc(100dvh - env(safe-area-inset-top) - 16px));
+  overflow: hidden;
   padding: 10px 20px calc(26px + env(safe-area-inset-bottom));
   border-radius: 26px 26px 0 0;
   background: white;
@@ -1650,16 +1651,23 @@
   transition: transform 240ms cubic-bezier(.2, .8, .2, 1);
 }
 
+.more-sheet:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+}
+
 .sheet-open {
   overflow: hidden;
 }
 
+.sheet-open .toast-region { z-index: 290; }
 .sheet-open .sheet-backdrop { opacity: 1; }
 .sheet-open .more-sheet { transform: translateY(0); }
 
 .more-sheet__handle {
   width: 42px;
   height: 5px;
+  flex: 0 0 auto;
   margin: 0 auto 18px;
   border-radius: 999px;
   background: var(--line-strong);
@@ -1667,6 +1675,7 @@
 
 .more-sheet__header {
   display: flex;
+  flex: 0 0 auto;
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
@@ -1698,7 +1707,11 @@
 
 .more-sheet__grid {
   display: grid;
+  min-height: 0;
   gap: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .more-sheet__section-label {
