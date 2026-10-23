@@ -14,6 +14,8 @@
     { icon: "terminal", tone: "cyan", title: "Encontrar plataforma", text: "Caminho até a plataforma 12", href: "rodoviaria.html" },
     { icon: "route", tone: "blue", title: "Acompanhar viagem", text: "Mapa e localização simulada ao vivo", href: "rota.html", featured: true },
     { icon: "stops", tone: "violet", title: "Pontos de parada", text: "Horários e tempo em cada local", href: "paradas.html" },
+    { icon: "weather", tone: "cyan", title: "Clima na chegada", text: "Temperatura e chuva no destino", href: "clima.html" },
+    { icon: "landmark", tone: "violet", title: "Roteiros turísticos", text: "Passeios com fotos e história em São Paulo", href: "roteiros.html" },
     { icon: "store", tone: "amber", title: "Restaurantes e serviços", text: "Planeje o que fazer na próxima parada", href: "estabelecimentos.html?stop=aparecida", key: "establishments" },
     { icon: "share", tone: "green", title: "Compartilhar viagem", text: "Envie o acompanhamento para a família", href: "compartilhar.html" }
   ];

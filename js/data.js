@@ -3,7 +3,7 @@
 
   window.CYBERBUS_DATA = {
     code: "BR1024",
-    date: "7 de setembro de 2026",
+    date: new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "America/Sao_Paulo" }).format(new Date()),
     status: {
       label: "Em viagem",
       punctuality: "No horário",

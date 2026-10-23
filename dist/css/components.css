@@ -4279,3 +4279,187 @@
 .confirm-dialog h2 { margin-bottom: 9px; font-size: 1.45rem; }
 .confirm-dialog p { margin-bottom: 22px; color: var(--ink-600); font-size: 0.78rem; }
 .confirm-dialog__actions { display: grid; gap: 9px; }
+
+/* Weather at arrival */
+.weather-layout {
+  margin-top: 0;
+}
+
+.weather-hero {
+  padding: 26px;
+  border-color: #c9dfef;
+  background: linear-gradient(145deg, white, #f2f9ff);
+}
+
+.weather-hero__heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.weather-hero__heading .feature-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.weather-hero__heading h3 {
+  margin: 0 0 3px;
+  font-size: 1.4rem;
+}
+
+.weather-hero__heading p:last-child {
+  margin: 0;
+  color: var(--ink-600);
+  font-size: 0.8rem;
+}
+
+.weather-hero__reading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 24px 0;
+}
+
+.weather-hero__reading > strong {
+  color: var(--navy-900);
+  font-size: clamp(3.2rem, 11vw, 5rem);
+  letter-spacing: -0.07em;
+  line-height: 1;
+}
+
+.weather-hero__reading p {
+  margin: 7px 0 0;
+  color: var(--ink-600);
+  font-size: 0.88rem;
+}
+
+.weather-hero__metrics {
+  margin-bottom: 0;
+}
+
+.weather-hero__metrics strong {
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+}
+
+.weather-note {
+  margin-top: 16px;
+}
+
+.weather-details .trip-mini-card > div:first-child strong {
+  letter-spacing: -0.01em;
+}
+
+.weather-details__list {
+  margin: 18px 0 0;
+}
+
+.weather-details__list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+}
+
+.weather-details__list dt {
+  color: var(--ink-500);
+}
+
+.weather-details__list dd {
+  margin: 0;
+  font-weight: 800;
+  text-align: right;
+}
+
+/* Destination itineraries */
+.tour-planning-note {
+  margin-bottom: 28px;
+}
+
+.tour-planning-note > span:first-child {
+  flex: 0 0 auto;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.tour-route-overview {
+  margin-bottom: 20px;
+  border-color: #c9dfef;
+  background: linear-gradient(145deg, white, #f4f9ff);
+}
+
+.tour-route-overview > p {
+  margin: 14px 0;
+  color: var(--ink-600);
+  font-size: 0.84rem;
+}
+
+.tour-stop-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.tour-stop-card .establishment-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.tour-stop-card__history strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink-900);
+}
+
+.tour-stop-card__details {
+  display: grid;
+  gap: 12px;
+  margin: 2px 0 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.tour-stop-card__details dt {
+  margin-bottom: 4px;
+  color: var(--blue-700);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tour-stop-card__details dd {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 0.78rem;
+}
+
+.tour-stop-card__details dd svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.tour-stop-card .establishment-card__footer {
+  margin-top: auto;
+}
+
+.tour-photo-credit {
+  display: block;
+  margin-top: 12px;
+  color: var(--ink-500);
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+
+.tour-photo-credit a {
+  color: var(--blue-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -9,7 +9,7 @@ REQUIRED_PAGES = {
     "index.html", "viagem.html", "onibus.html", "rodoviaria.html", "rota.html",
     "paradas.html", "parada-detalhes.html", "estabelecimentos.html",
     "estabelecimento-detalhes.html", "compartilhar.html",
-    "acompanhamento.html", "emergencia.html",
+    "acompanhamento.html", "emergencia.html", "clima.html", "roteiros.html",
 }
 
 

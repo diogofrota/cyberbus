@@ -35,6 +35,9 @@
     bank: '<path d="m3 9 9-5 9 5M5 10v7m5-7v7m4-7v7m5-7v7M3 20h18M2 17h20"></path>',
     cart: '<path d="M3 4h2l2 11h10l3-7H6M9 20h.01M17 20h.01"></path>',
     location: '<circle cx="12" cy="12" r="3"></circle><circle cx="12" cy="12" r="8"></circle><path d="M12 2v2m0 16v2M2 12h2m16 0h2"></path>',
+    weather: '<path d="M12 3v2m0 14v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2m14 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path><circle cx="12" cy="12" r="4"></circle>',
+    moon: '<path d="M20.5 14.3A8.7 8.7 0 0 1 9.7 3.5 8.8 8.8 0 1 0 20.5 14.3Z"></path>',
+    landmark: '<path d="m3 9 9-5 9 5M4 10h16M6 10v9m4-9v9m4-9v9m4-9v9M3 20h18"></path>',
     phone: '<path d="M8 3H5a2 2 0 0 0-2 2c0 8.8 7.2 16 16 16a2 2 0 0 0 2-2v-3l-4-1-2 2c-3.8-1.2-6.8-4.2-8-8l2-2-1-4Z"></path>'
   };
 
@@ -182,7 +185,7 @@
     var mount = document.querySelector("[data-bottom-nav]");
     if (!mount) return;
     var page = document.body.dataset.page || "viagem";
-    var moreActive = ["rodoviaria", "estabelecimentos", "estabelecimento-detalhes", "compartilhar", "emergencia"].indexOf(page) >= 0;
+    var moreActive = ["rodoviaria", "estabelecimentos", "estabelecimento-detalhes", "compartilhar", "emergencia", "clima", "roteiros"].indexOf(page) >= 0;
     var tripActive = page === "viagem";
     var busActive = page === "onibus";
     var routeActive = page === "rota";
@@ -206,6 +209,8 @@
       '<div class="more-sheet__grid">' +
       '<a href="' + withTrip("rodoviaria.html") + '"><span class="feature-icon">' + icon("terminal") + "</span><span><strong>Rodoviária</strong><small>Encontre a plataforma</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("estabelecimentos.html?stop=resende") + '"><span class="feature-icon feature-icon--amber">' + icon("store") + "</span><span><strong>Restaurantes e lojas</strong><small>Veja o que há nas paradas</small></span>" + icon("chevron") + "</a>" +
+      '<a href="' + withTrip("clima.html") + '"><span class="feature-icon feature-icon--cyan">' + icon("weather") + "</span><span><strong>Clima na chegada</strong><small>Veja a previsão simulada no destino</small></span>" + icon("chevron") + "</a>" +
+      '<a href="' + withTrip("roteiros.html") + '"><span class="feature-icon feature-icon--violet">' + icon("landmark") + "</span><span><strong>Roteiros turísticos</strong><small>Explore São Paulo após a viagem</small></span>" + icon("chevron") + "</a>" +
       '<a href="' + withTrip("compartilhar.html") + '"><span class="feature-icon feature-icon--green">' + icon("share") + "</span><span><strong>Compartilhar viagem</strong><small>Mantenha a família informada</small></span>" + icon("chevron") + "</a>" +
       '<a class="more-sheet__danger" href="' + withTrip("emergencia.html") + '"><span class="feature-icon feature-icon--red">' + icon("alert") + "</span><span><strong>Emergência</strong><small>Dados e suporte da viagem</small></span>" + icon("chevron") + "</a>" +
       "</div></section>";

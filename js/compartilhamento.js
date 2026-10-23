@@ -11,7 +11,10 @@
   var shareControls = [copyButton].concat(shareButtons);
   var shareBusy = false;
   var origin = window.location.protocol === "file:" ? "https://cyberbus-viagem.diogofrota.chatgpt.site" : window.location.origin;
-  var shareUrl = origin + "/acompanhamento.html?trip=" + encodeURIComponent(data.code) + "&share=demo7K2";
+  var sharePath = "acompanhamento.html?trip=" + encodeURIComponent(data.code) + "&share=demo7K2";
+  var shareUrl = window.location.protocol === "file:"
+    ? origin + "/" + sharePath
+    : new URL(sharePath, window.location.href).href;
   var navigationUrl = app.withTrip("acompanhamento.html?share=demo7K2");
 
   field.value = shareUrl;

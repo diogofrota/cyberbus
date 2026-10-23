@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Sugestões de roteiros turísticos em São Paulo para aproveitar a cidade após a chegada.">
+    <title>Roteiros em São Paulo — CyberBus</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+  </head>
+  <body class="app-page" data-page="roteiros" aria-busy="true">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <div data-app-header></div>
+
+    <main class="app-main container" id="conteudo">
+      <nav class="breadcrumb" aria-label="Navegação estrutural"><a href="viagem.html?trip=BR1024">Minha viagem</a><span>/</span><span aria-current="page">Roteiros em São Paulo</span></nav>
+      <header class="page-heading">
+        <div>
+          <p class="eyebrow">Descubra o destino</p>
+          <h1>São Paulo para explorar.</h1>
+          <p>Escolha um roteiro e conheça a história, a localização e as opções de visita de cada parada.</p>
+        </div>
+      </header>
+
+      <div class="inline-alert inline-alert--info tour-planning-note">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5m0-8h.01"></path></svg>
+        <span>Estes roteiros são sugestões para depois da chegada. Confira dias de abertura, ingressos e programação nos sites oficiais antes de sair.</span>
+      </div>
+
+      <section class="filter-section" aria-labelledby="tour-route-filter-title">
+        <div class="section-heading section-heading--compact">
+          <div><p class="eyebrow">Planeje seu passeio</p><h2 id="tour-route-filter-title">Qual roteiro combina com você?</h2></div>
+          <p id="tour-route-count" aria-live="polite"></p>
+        </div>
+        <div class="filter-chips" role="group" aria-label="Escolher roteiro turístico">
+          <button class="is-active" type="button" data-tour-route="centro" aria-pressed="true">Centro histórico</button>
+          <button type="button" data-tour-route="arte-verde" aria-pressed="false">Arte e verde</button>
+          <button type="button" data-tour-route="imigracao-sabores" aria-pressed="false">Imigração e sabores</button>
+        </div>
+      </section>
+
+      <section id="tour-route-content" aria-labelledby="tour-route-title" aria-live="polite"></section>
+    </main>
+
+    <div data-app-footer></div>
+    <div data-bottom-nav></div>
+    <div data-more-sheet></div>
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/roteiros.js"></script>
+  </body>
+</html>
